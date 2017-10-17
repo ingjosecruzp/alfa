@@ -1,5 +1,5 @@
 app.factory('Codigo', function ($resource) {
-    return $resource('http://localhost:51475/WSCodigos.svc/codigoslibros/:item',{item: "@item"});
+    return $resource('http://localhost:8080/WSCodigos.svc/:item',{item: "@item"});
     /*return $resource('http://172.16.5.78:8080/WSUsuarios.svc/usuarios/:item',
     	{item: "@item"},
     	{
