@@ -21,4 +21,4 @@ app.controller('MainController', function($scope,$ionicPopup,$state,$ionicPlatfo
             console.log(err);
         }
     }
-});
+})
