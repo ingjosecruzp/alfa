@@ -67,6 +67,15 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         }
       }
     })
+    .state('tab.categorias', {
+      url: '/categorias',
+      views: {
+        'tab-categorias': {
+          templateUrl: 'templates/categorias.html',
+          controller: 'CategoriasController'
+        }
+      }
+    })
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
