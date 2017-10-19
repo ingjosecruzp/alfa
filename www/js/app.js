@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app=angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource'])
+var app=angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ngCordova'])
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -23,7 +23,7 @@ app.run(function($ionicPlatform) {
   });
 });
 
-app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
+app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfigProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -98,6 +98,9 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
+
+  //Obliga a que los tabs siempre salgan en la parte inferior
+  $ionicConfigProvider.tabs.position('bottom');
 
 });
 //Modifica la referencia cirulares de las peticiones entrantes
