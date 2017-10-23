@@ -1,4 +1,4 @@
-app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Codigo,$state,$cordovaDevice,$cordovaFileTransfer,$q) {
+app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Codigo,$state,$cordovaDevice,$cordovaFileTransfer,$q,$cordovaSQLite) {
     $scope.data = {};
     $scope.codigos={};
  
@@ -14,7 +14,7 @@ app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlat
                 var acceso = Codigo.query({codigo:$scope.codigos.codigo,uuid:uuid}, function(response) {   
                     var uuid;  
                     $ionicLoading.hide();
-                    
+
                     var alertPopup = $ionicPopup.alert({
                         title: 'Felicidades',
                         subTitle: 'Felicidades has adquirido '+ response.data.length + ' libro.',
@@ -31,6 +31,8 @@ app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlat
 
                         //Arreglo con promesas que se van ejecutar todas al mismo tiempo
                         var promises = [];
+
+                        console.log(response.data);
                         
                         response.data.forEach(function(libro) {
                             var url = "http://200.52.220.238:8080/cover/"+libro.libros.RutaThumbnails;
@@ -40,13 +42,28 @@ app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlat
                         
                         
                         $q.all(promises).then(function(res) {
-                            console.log("in theory, all done");
                             /*for(var i=0; i<res.length; i++) {
                                 //$scope.images.push(res[i].nativeURL);
                                 console.log(res[i]);
                             }*/
                             $ionicLoading.hide();
-                            $state.go('tab.mislibros');
+                            db = $cordovaSQLite.openDB({ name: "alfabooks.db", iosDatabaseLocation:'default'}); 
+                            
+                            db.transaction(function(tx) {
+                                tx.executeSql('CREATE TABLE IF NOT EXISTS libros (id, nombre,ruta)');
+                                response.data.forEach(function(libro) {
+                                    var id=libro.libros.Id;
+                                    var nombre=libro.libros.Nombre;
+                                    var ruta=libro.libros.Id.RutaThumbnails;
+                                    tx.executeSql('INSERT INTO libros VALUES (?,?,?)', [id, nombre,ruta]);
+                                });
+                              }, function(error) {
+                                console.log('Transaction ERROR: ' + error.message);
+                              }, function() {
+                                console.log('Populated database OK');
+                              });
+
+                            //$state.go('tab.mislibros');
                         });
                       
                     });
