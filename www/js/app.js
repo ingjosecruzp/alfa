@@ -77,9 +77,9 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
       }
     })
     .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+      url: '/categorias/:chatId',
       views: {
-        'tab-chats': {
+        'tab-categorias': {
           templateUrl: 'templates/chat-detail.html',
           controller: 'ChatDetailCtrl'
         }
