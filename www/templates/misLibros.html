@@ -1,9 +1,9 @@
-<ion-view name="mislibros-view" >
-        <ion-content  class="center">
-              <div class="row">
-                <div class="col text-center">
-                    Aun no cuentas con ningun libro,para adquirirlos ingresa tu codigo de n digitos
-                </div>
-              </div>
+<ion-view name="mislibros-view" ng-init="BtnCodigo()">
+        <ion-content>
+            <ul class="dynamic-grid" angular-grid="pics" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
+                <li data-ng-repeat="libro in Libros" class="grid" data-ng-clock>
+                    Test<img ng-src="img/ben.png" class="grid-img" data-actual-width = "{{libro.width}}"  data-actual-height="{{libro.height}}" />
+                </li>
+            </ul>
         </ion-content>
 </ion-view>

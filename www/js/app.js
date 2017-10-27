@@ -5,25 +5,45 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+var db = null;
+
 var app=angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ngCordova'])
 
-app.run(function($ionicPlatform) {
+app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    if(window.cordova) {
+      // App syntax
+      db = $cordovaSQLite.openDB({ name: "alfabooks.db", iosDatabaseLocation:'default'}); 
+    }
+    
+    //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS libros;');
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS libros (id integer primary key, nombre,ruta,width,height)');
+
+    mislibros.all().then(function(libros){
+      //Si el usuario no cuenta con ningun libro lo manda a la ventana de ingresar codigo
+      if(libros.length==0)
+        $rootScope.showTab=true; //Muestra la ventana de codigos
+      else
+        $rootScope.showTab=false;  //Muestra la venta de mis libros
+        
+    });
+
   });
 });
 
-app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfigProvider) {
+app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfigProvider,$compileProvider) {
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*((https?|ftp|file|blob):|data:image\/)/);
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -31,10 +51,11 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'templates/tabs.html',
+    controller: 'TabsController'
   })
 
   // Each tab has its own nav history stack:
@@ -52,7 +73,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
   .state('tab.codigo', {
       url: '/codigo',
       views: {
-        'tab-misLibros': {
+        'tab-Codigo': {
           templateUrl: 'templates/codigo.html',
           controller: 'CodigoController'
         }
