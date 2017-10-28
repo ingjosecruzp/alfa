@@ -56,14 +56,21 @@
         /*column-gap: 0px;*/
         padding: 10px;
     }
+    .one-image {
+        margin: 2px;
+        width: 159px;
+    }
 }
 
 @media (min-width: 420px) {
     .images {
-        column-count: 4;
-        column-gap: 0px;
-        width: 100%;
-        margin: 0px;
+        column-count: 3;
+        /*column-gap: 0px;*/
+        padding: 10px;
+    }
+    .one-image {
+        margin: 2px;
+        width: 192px;
     }
 }
 
@@ -74,10 +81,6 @@
     }
 }
 
-.one-image {
-    margin: 2px;
-    width: 159px;
-}
 .image-rouder{
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
