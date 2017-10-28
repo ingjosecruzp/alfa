@@ -1,10 +1,10 @@
-app.controller('MainController', function($scope,$ionicPopup,$state,$ionicPlatform,Codigo) {
+app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$ionicPlatform,Libros) {
     $scope.data = {};
-    $scope.librocodigo={};
+    $scope.categoriaid={};
  
-        $scope.BtnCodigo = function() {
+        $scope.CategoriaLibros = function() {
         try{
-           var acceso = Codigo.query($scope.librocodigo, function() {   
+           var acceso = Libros.query($scope.categoriaid, function() {   
                         var alertPopup = $ionicPopup.alert({
                         title: 'Felicidades',
                         subTitle: 'Codigo correcto',
