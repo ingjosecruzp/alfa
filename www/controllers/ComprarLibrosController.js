@@ -1,13 +1,20 @@
-app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$ionicPlatform,$stateParams,Libros) {
+app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$ionicPlatform,$stateParams,Libros,$ionicLoading) {
     $scope.data = {};
     $scope.libros={};
  
         $scope.CategoriaLibros = function() {
         try{
-            console.log("si entro"+$stateParams.IdCategoria);
-            Libros.query({categoria:$stateParams.IdCategoria}, function(respuesta) {   
-             console.log(respuesta);
-                $scope.libros=respuesta.data;
+            
+            $ionicLoading.show({
+                noBackdrop :false,
+                template: '<ion-spinner icon="spiral"></ion-spinner><br>Monstrando Libros',
+                //duration :20000//Optional
+            });
+
+            Libros.query({categoria:$stateParams.IdCategoria}, function(respuesta) {
+            
+                    $ionicLoading.hide();   
+                    $scope.libros=respuesta.data;
             }, function(error) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Error',
