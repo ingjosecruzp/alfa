@@ -98,11 +98,11 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
       }
     })
     .state('tab.chat-detail', {
-      url: '/categorias/:chatId',
+      url: '/categorias/:IdCategoria',
       views: {
         'tab-categorias': {
           templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+          controller: 'ComprarLibrosController'
         }
       }
     })
