@@ -53,6 +53,9 @@
 @media (min-width: 0px) {
     .images {
         column-count: 2;
+        -webkit-column-count: 2; /* Chrome, Safari, Opera */
+        -moz-column-count: 2; /* Firefox */
+        column-count: 2;
         /*column-gap: 0px;*/
         padding: 10px;
     }
@@ -64,6 +67,9 @@
 
 @media (min-width: 420px) {
     .images {
+        column-count: 3;
+        -webkit-column-count: 3; /* Chrome, Safari, Opera */
+        -moz-column-count: 3; /* Firefox */
         column-count: 3;
         /*column-gap: 0px;*/
         padding: 10px;
@@ -77,6 +83,9 @@
 @media (min-width: 720px) {
     .images {
         column-count: 4;
+        -webkit-column-count: 4; /* Chrome, Safari, Opera */
+        -moz-column-count: 4; /* Firefox */
+        column-count: 3;
         column-gap: 0px;
     }
 }
