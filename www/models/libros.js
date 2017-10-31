@@ -1,5 +1,6 @@
 app.factory('Libros', function ($resource,resourceInterceptor) {
-		return $resource('http://localhost:8080/WSLibros.svc/libros/:item',
+		return $resource('http://200.52.220.238:8080/WSLibros.svc/libros/:item',
+		//return $resource('http://localhost:8080/WSLibros.svc/libros/:item',
 											{item: "@item"},
 											{
 												'get':    {method:'GET',interceptor: resourceInterceptor},
