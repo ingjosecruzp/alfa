@@ -1,8 +1,8 @@
-<ion-view ng-init="CategoriaLibros();">
+<ion-view ng-init="BuscarLibros();">
   <ion-content>
       <div class="images">
               <div class="one-image" ng-repeat="libro in libros">
-                  <img src="http://localhost:8080/cover/{{libro.libros.RutaThumbnails}}" class="image-rouder" width="100%">
+                  <img src="http://localhost:8080/cover/{{libro.RutaThumbnails}}" class="image-rouder" width="100%">
               </div>
       </div>
   </ion-content>

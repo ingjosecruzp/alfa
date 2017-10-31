@@ -1,6 +1,6 @@
-app.controller('CategoriasController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Codigo,$state) {
+app.controller('CategoriasController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Libros,$state) {
     $scope.data = {};
-    $scope.codigos={};
+    $scope.libros={};
     
     $scope.listacategorias=
       [
@@ -10,5 +10,11 @@ app.controller('CategoriasController', function($scope,$ionicPopup,$state,$ionic
           {'id':4,'name':'Fisioterapia','img':'323232323'},
           {'id':5,'name':'Programacion','img':'323232323'}
       ];
+      
+      $scope.BtnBuscar= function(){
+       /*  $state.go('tab.chat-detail/1');*/
+       
+         $state.go('tab.comprarLibrosBuscar', {LibroaBuscar:$scope.libros.searchQuery});
+      }
 
 });

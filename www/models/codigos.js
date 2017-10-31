@@ -5,7 +5,7 @@ app.factory('Codigo', function ($resource,resourceInterceptor) {
 											{
 												'get':    {method:'GET',interceptor: resourceInterceptor},
 												'save':   {method:'POST',interceptor: resourceInterceptor},
-												'query':  {method:'GET', isArray:true,interceptor: resourceInterceptor},
+												'query':  {method:'GET', isArray:true,interceptor: resourceInterceptor,params:'search'},
 												'remove': {method:'DELETE',interceptor: resourceInterceptor},
 												'delete': {method:'DELETE',interceptor: resourceInterceptor}
 											}

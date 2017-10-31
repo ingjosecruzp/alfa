@@ -106,6 +106,15 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
         }
       }
     })
+    .state('tab.comprarLibrosBuscar', {
+      url: '/categorias/:LibroaBuscar',
+      views: {
+        'tab-categorias': {
+          templateUrl: 'templates/comprarLibrosBuscar.html',
+          controller: 'ComprarLibrosController'
+        }
+      }
+    })
 
   .state('tab.account', {
     url: '/account',
