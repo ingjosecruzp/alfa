@@ -101,7 +101,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
       url: '/categorias/:IdCategoria',
       views: {
         'tab-categorias': {
-          templateUrl: 'templates/chat-detail.html',
+          templateUrl: 'templates/comprarLibrosCategorias.html',
           controller: 'ComprarLibrosController'
         }
       }
