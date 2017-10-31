@@ -11,7 +11,7 @@ app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlat
             });
             $ionicPlatform.ready(function () {
                 var uuid = $cordovaDevice.getUUID();
-                var acceso = Codigo.query({codigo:$scope.codigos.codigo,uuid:uuid}, function(response) {   
+                var acceso = Codigo.query({search:'getXCodigo',codigo:$scope.codigos.codigo,uuid:uuid}, function(response) {   
                     var uuid;  
                     $ionicLoading.hide();
 
