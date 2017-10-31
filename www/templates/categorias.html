@@ -6,13 +6,16 @@
       </label> 
     -->
     <div class="list list-inset">
-        <label class="item item-input" style="border-style: none;background-color: rgb(248, 248, 248);">
-          <i class="icon ion-search placeholder-icon" ></i>
-          <input type="search" placeholder="Buscar" ng-model="searchQuery" >
-        </label>
+        <div class="item item-input" style="border-style: none;background-color: rgb(248, 248, 248);">
+          <input type="search" placeholder="Buscar" ng-model="libros.searchQuery" >
+          <span class="button button-small" ng-click="BtnBuscar();">
+            <i class="icon ion-search placeholder-icon"></i>
+          </span>
+        </div>
+
       </div>
       <ion-list no-lines>
-        <ion-item ng-model="categorias.id" ng-repeat="categorias in listacategorias | filter:searchQuery"  style="border-color:rgba(221, 221, 221, 0);font-size: 20px;font-weight: bold"  href="#/tab/categorias/{{categorias.id}}">
+        <ion-item ng-model="categorias.id" ng-repeat="categorias in listacategorias"  style="border-color:rgba(221, 221, 221, 0);font-size: 20px;font-weight: bold"  href="#/tab/categorias/{{categorias.id}}">
           {{categorias.name}}
         </ion-item>
 
