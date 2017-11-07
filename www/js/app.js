@@ -115,6 +115,15 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
         }
       }
     })
+    .state('tab.comprarLibrosVistaModal', {
+      url: '/categorias/VistaModal',
+      views: {
+        'tab-VistaModal': {
+          templateUrl: 'templates/comprarLibrosVistaModal.html',
+          controller: 'ComprarLibrosController'
+        }
+      }
+    })
 
   .state('tab.account', {
     url: '/account',
@@ -157,5 +166,19 @@ app.service('Servicios', function() {
                 return value; 
             });
     };
+});
+ //Directiva para usar el boto serar y go del celular
+ app.directive('ngEnter', function() {
+  return function(scope, element, attrs) {
+      element.bind("keydown keypress", function(event) {
+          if(event.which === 13) {
+                  scope.$apply(function(){
+                          scope.$eval(attrs.ngEnter);
+                  });
+                  
+                  event.preventDefault();
+          }
+      });
+  };
 });
 

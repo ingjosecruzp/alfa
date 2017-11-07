@@ -1,0 +1,28 @@
+
+<div class="modal" style="background: radial-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.92));">
+    
+   <!-- Modal header bar -->
+   <ion-header-bar class="bar-secondary" style="background-image:none;background:radial-gradient(rgba(241, 76, 76, 0), rgba(255, 255, 255, 0.31));">
+      <h1 class="title" style="font-weight: bold">{{getlibro.Nombre}}</h1>
+    <button class="button button-clear button-positive" ng-click="closeNewTask()">X</button>
+  </ion-header-bar>
+
+    
+        <!-- Modal content area -->
+        <ion-content  >
+          <div>
+            <div>
+                <img src="http://localhost:8080/cover/{{getlibro.RutaThumbnails}}"  width="100%"  style="width: 90%;padding-left: 10%">
+            </div>
+            <div>
+                <button class="button button-block button-positive" style="background-color: #f53838;margin-left: 10%;position: fixed;width: 24%;"  ng-click="closeNewTask()">Comprar</button>
+                <p class="title" style="font-weight: bold;font-size: x-large;padding-left: 35%;padding-top: 3%;">{{getlibro.Nombre}}</p>
+                <p style="padding-top: 5%;padding-left: 10%;">{{getlibro.Resena}}</p>
+            </div>
+
+            </div>
+    
+        </ion-content>
+      </div>
+
+

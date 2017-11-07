@@ -1,8 +1,8 @@
 <ion-view ng-init="CategoriaLibros();">
   <ion-content>
       <div class="images">
-              <div class="one-image" ng-repeat="libro in libros">
-                  <img src="http://200.52.220.238:8080/cover/{{libro.libros.RutaThumbnails}}" class="image-rouder" width="100%">
+              <div class="one-image" ng-repeat="libro in libros" ng-model="libros.Id">
+                  <img src="http://localhost:8080/cover/{{libro.libros.RutaThumbnails}}" class="image-rouder" width="100%" ng-click="newTask(libro.libros)">
               </div>
       </div>
   </ion-content>
