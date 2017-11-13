@@ -28,10 +28,11 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros) {
     }
     
     //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS libros;');
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS libros (id integer primary key, nombre,ruta,width,height)');
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS libros (id PRIMARY KEY,nombre,ruta,width,height)');
 
     mislibros.all().then(function(libros){
       //Si el usuario no cuenta con ningun libro lo manda a la ventana de ingresar codigo
+      console.log("numero del libros="+ libros.length)
       if(libros.length==0)
         $rootScope.showTab=true; //Muestra la ventana de codigos
       else
@@ -180,5 +181,9 @@ app.service('Servicios', function() {
           }
       });
   };
+});
+//Variables Globales
+app.value('Variables',{
+  IpServidor: '200.52.220.238:8082'
 });
 

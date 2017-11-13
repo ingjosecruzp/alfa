@@ -1,22 +1,23 @@
-app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$ionicPlatform,$stateParams,Libros,$ionicLoading,$ionicModal,$timeout) {
+app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$ionicPlatform,$stateParams,Libros,$ionicLoading,$ionicModal,Variables) {
     $scope.data = {};
     $scope.libros=[];
     $scope.getlibro={};
     $scope.InfiniteScroll=false;
  
-        $scope.CategoriaLibros = function() {
+    $scope.CategoriaLibros = function() {
         try{
-            
             $ionicLoading.show({
                 noBackdrop :false,
-                template: '<ion-spinner icon="spiral"></ion-spinner><br>Monstrando Libros',
-                //duration :20000//Optional
+                template: '<ion-spinner icon="spiral"></ion-spinner><br>Monstrando Libros'
             });
             console.log($stateParams.IdCategoria);
             Libros.query({search:'getXcategoria',categoria:$stateParams.IdCategoria}, function(respuesta) {
             
                     $ionicLoading.hide();   
-                    $scope.libros=respuesta.data;
+                    respuesta.data.forEach(function(libro) {
+                        libro.libros.RutaThumbnails="http://"+Variables.IpServidor+"/cover/"+libro.libros.RutaThumbnails;
+                        $scope.libros.push(libro);
+                    });
                     
             }, function(error) {
                 $ionicLoading.hide(); 
@@ -48,6 +49,7 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
                         $scope.InfiniteScroll=false;
 
                     respuesta.data.forEach(function(libro) {
+                        libro.RutaThumbnails="http://"+Variables.IpServidor+"/cover/"+libro.RutaThumbnails;
                         $scope.libros.push(libro);
                     });
                     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -97,8 +99,7 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
     
       // Open our new task modal
       $scope.newTask = function(libro) {
-          $scope.getlibro=libro;
-          console.log("arreglo libro "+libro)
+        $scope.getlibro=libro;
         $scope.taskModal.show();
       };
 

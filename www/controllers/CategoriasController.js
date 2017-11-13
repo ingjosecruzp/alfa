@@ -1,4 +1,4 @@
-app.controller('CategoriasController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Libros) {
+app.controller('CategoriasController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Libros,Variables) {
     $scope.data = {};
     $scope.libros={};
     

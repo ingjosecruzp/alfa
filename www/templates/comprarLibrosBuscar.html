@@ -2,7 +2,7 @@
   <ion-content>
       <div class="images">
               <div class="one-image" ng-repeat="libro in libros" ng-model="libros.Id">
-                  <img src="http://localhost:8080/cover/{{libro.RutaThumbnails}}" class="image-rouder" width="100%" ng-click="newTask(libro)">
+                  <img src="{{libro.RutaThumbnails}}" class="image-rouder" width="100%" ng-click="newTask(libro)">
               </div>
       </div>
       <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="BuscarLibros()" distance="1%"></ion-infinite-scroll>

@@ -1,6 +1,5 @@
-app.factory('Codigo', function ($resource,resourceInterceptor) {
-		return $resource('http://localhost:8080/WSCodigos.svc/codigos/:item',
-		//return $resource('http://172.16.5.78:8080/WSCodigos.svc/codigos/:item',
+app.factory('Codigo', function ($resource,resourceInterceptor,Variables) {
+		return $resource('http://'+ Variables.IpServidor+'/WSCodigos.svc/codigos/:item',
 											{item: "@item"},
 											{
 												'get':    {method:'GET',interceptor: resourceInterceptor},
