@@ -1,8 +1,54 @@
-app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Codigo,$state,$cordovaDevice,$cordovaFileTransfer,$q,$cordovaSQLite,$rootScope,mislibros,Variables) {
+app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Codigo,$state,$cordovaDevice,$cordovaFileTransfer,$q,$cordovaSQLite,$rootScope,mislibros,Variables,GestionLibros) {
     $scope.data = {};
     $scope.codigos={};
- 
+
     $scope.BtnCodigo = function() {
+        try{
+            $ionicLoading.show({
+                noBackdrop :false,
+                template: '<ion-spinner icon="spiral"></ion-spinner><br>Verificando codigo'
+            });
+            $ionicPlatform.ready(function () {
+                var uuid = $cordovaDevice.getUUID();
+                var acceso = Codigo.query({search:'VerificarCodigo',codigo:$scope.codigos.codigo,uuid:uuid}, function(response) {
+                    var codigo=response.data[0];
+                    
+                    switch(codigo.Tipo) {
+                        case "Paquete":
+                            GestionLibros.CodigoPaquete(codigo).then(function(rsp){
+                                console.log("final de todo");
+                                //Muestra la venta de mis libros
+                                $scope.codigos={};
+                                $rootScope.showTab=false;
+                                $state.go('tab.mislibros');
+                            });
+                            break;
+                        case "Libre":
+                            GestionLibros.CodigoLibre(codigo).then(function(rsp){
+                                console.log(rsp);
+                                /*$scope.TotalLibros=rsp.Total;*/
+                                $scope.codigos={};
+                            });
+                            break;
+                        case "Combinado":
+                            GestionLibros.CodigoCombinado();
+                    }
+                    
+                }, function(error) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Error',
+                        template: error.headers("Error")
+                    });
+                    $ionicLoading.hide();
+                });
+            });  
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+ 
+    /*$scope.BtnCodigo = function() {
         try{
             $ionicLoading.show({
                 noBackdrop :false,
@@ -75,5 +121,5 @@ app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlat
         catch(err){
             console.log(err);
         }
-    }
+    }*/
 });

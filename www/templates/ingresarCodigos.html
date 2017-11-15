@@ -1,0 +1,28 @@
+<ion-view name="codigo-view" ng-init="Inicio()">
+    <div style="padding:11px">
+        <h1>+{{TotalLibros}}</h1>
+    </div>
+    <ion-content  class="center">
+          <div class="row">
+            <div class="col text-center">
+                Ingresa tu codigo para adquirir mas libros
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <center>
+                <input type="text" name="txtCodigo" ng-model="codigos.codigo" ng-enter="BtnCodigo();" placeholder="Ingresa tu codigo" style="text-align:center;border: 0;border-bottom: 1px solid rgb(85, 79, 79);outline: 0;">
+              </center>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <center>
+                <button class="button button-block button-positive" style="width:70%;" ng-click="BtnCodigo();" ng-disabled="FrmRegistro.$invalid || savingfrm == true">
+                    Aceptar
+                </button>
+              </center>
+            </div>
+        </div>
+    </ion-content>
+  </ion-view>

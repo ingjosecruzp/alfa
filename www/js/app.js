@@ -9,7 +9,7 @@ var db = null;
 
 var app=angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ngCordova'])
 
-app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros) {
+app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -28,7 +28,9 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros) {
     }
     
     //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS libros;');
+    //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS movimientos;');
     $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS libros (id PRIMARY KEY,nombre,ruta,width,height)');
+    $cordovaSQLite.execute(db,"CREATE TABLE  IF NOT EXISTS movimientos (id INTEGER PRIMARY KEY AUTOINCREMENT,codigo VARCHAR (40) NOT NULL,entrada INTEGER,salida INTEGER);")
 
     mislibros.all().then(function(libros){
       //Si el usuario no cuenta con ningun libro lo manda a la ventana de ingresar codigo
@@ -38,6 +40,11 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros) {
       else
         $rootScope.showTab=false;  //Muestra la venta de mis libros
         
+    });
+
+    movimientos.all().then(function(mov){
+      //Si el usuario no cuenta con ningun libro lo manda a la ventana de ingresar codigo
+      console.log(mov)
     });
 
   });
@@ -130,8 +137,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
     url: '/account',
     views: {
       'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+        templateUrl: 'templates/ingresarCodigos.html',
+        controller: 'IngresarCodigosController'
       }
     }
   });
