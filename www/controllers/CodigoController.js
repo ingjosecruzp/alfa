@@ -47,7 +47,6 @@ app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlat
             console.log(err);
         }
     }
- 
     /*$scope.BtnCodigo = function() {
         try{
             $ionicLoading.show({

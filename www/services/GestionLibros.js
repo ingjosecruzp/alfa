@@ -72,7 +72,7 @@ app.service('GestionLibros', function($ionicPlatform,$cordovaFileTransfer,movimi
     this.CodigoLibre=function(codigo) {
         var promesa = $q.defer();
 
-        //Cuando el codigo libre hace un movimiento de entrada para incrementar los creditos
+        //Cuando el codigo es libre hace un movimiento de entrada para incrementar los creditos
         var movimiento={
           codigo  : codigo.Codigo,
           entrada : codigo.TotalLibros,

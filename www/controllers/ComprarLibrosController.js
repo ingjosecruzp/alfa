@@ -1,4 +1,4 @@
-app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$ionicPlatform,$stateParams,Libros,$ionicLoading,$ionicModal,Variables,mislibros,$cordovaFileTransfer,$q,$cordovaDevice,$cordovaToast) {
+app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$ionicPlatform,$stateParams,Libros,$ionicLoading,$ionicModal,Variables,mislibros,$cordovaFileTransfer,$q,$cordovaDevice,$cordovaToast,$rootScope,movimientos) {
     $scope.data = {};
     $scope.libros=[];
     $scope.getlibro={};
@@ -153,9 +153,17 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
                             $ionicLoading.hide();
                             $scope.taskModal.hide();
                            
-                                $cordovaToast.show("message", 'long', 'center');
-                                
-                           
+                            $cordovaToast.show("message", 'long', 'center');
+                            $rootScope.showTab=false;  //Muestra la venta de mis libros
+
+                             //hace un movimiento de salida para decrementar los creditos
+                            var movimiento={
+                                codigo  :"0",
+                                entrada : 0,
+                                salida  : 1
+                            }
+                    
+                            movimientos.add(movimiento);
                               
                     },function(err){
                     $ionicLoading.hide();
