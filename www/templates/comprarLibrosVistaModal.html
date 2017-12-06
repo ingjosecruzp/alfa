@@ -9,20 +9,22 @@
 
     
         <!-- Modal content area -->
+        <ion-view cache-view="false" >
         <ion-content  >
           <div>
             <div>
                 <img src="{{getlibro.RutaThumbnails}}"  width="100%"  style="width: 90%;padding-left: 10%">
             </div>
             <div>
-                <button class="button button-block button-positive" style="background-color: #f53838;margin-left: 10%;position: fixed;width: 24%;"  ng-click="closeNewTask()">$</button>
+              <!--anadiraMisLibros(getlibro)-->
+                <button class="button button-block button-positive" style="background-color: #f53838;margin-left: 10%;position: fixed;width: 24%;"  ng-click="anadiraMisLibros(getlibro)">$</button>
                 <p class="title" style="font-weight: bold;font-size: x-large;padding-left: 35%;padding-top: 3%;">{{getlibro.Nombre}}</p>
                 <p style="padding-top: 5%;padding-left: 10%;">{{getlibro.Resena}}</p>
             </div>
 
             </div>
-    
         </ion-content>
+      </ion-view>
       </div>
 
 

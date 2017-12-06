@@ -80,6 +80,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
 
   .state('tab.codigo', {
       url: '/codigo',
+      
       views: {
         'tab-Codigo': {
           templateUrl: 'templates/codigo.html',
@@ -89,9 +90,10 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
     })
     .state('tab.mislibros', {
       url: '/mislibros',
+      
       views: {
         'tab-misLibros': {
-          templateUrl: 'templates/mislibros.html',
+          templateUrl: 'templates/misLibros.html',
           controller: 'MisLibrosController'
         }
       }
@@ -125,6 +127,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
     })
     .state('tab.comprarLibrosVistaModal', {
       url: '/categorias/VistaModal',
+      cache: false,
       views: {
         'tab-VistaModal': {
           templateUrl: 'templates/comprarLibrosVistaModal.html',

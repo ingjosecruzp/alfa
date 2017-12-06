@@ -11,5 +11,9 @@
     "www/**/*",
     "!www/lib/**/*",
     "!www/**/*.map"
-  ]
+  ],
+  "gulp": {
+    "enabled": false,
+    "enable": false
+  }
 }

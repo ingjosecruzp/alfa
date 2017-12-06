@@ -1,4 +1,4 @@
-app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$ionicPlatform,$stateParams,Libros,$ionicLoading,$ionicModal,Variables) {
+app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$ionicPlatform,$stateParams,Libros,$ionicLoading,$ionicModal,Variables,mislibros,$cordovaFileTransfer,$q,$cordovaDevice,$cordovaToast) {
     $scope.data = {};
     $scope.libros=[];
     $scope.getlibro={};
@@ -81,6 +81,16 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
             console.log(err);
         }
     }
+    $scope.showToast = function(message, duration, location) {
+        $ionicPlatform.ready(function () {
+                $cordovaToast.show(message, duration, location).then(function(success) {
+                    console.log("The toast was shown");
+                }, function (error) {
+                    console.log("The toast was not shown due to " + error);
+                });
+        });
+    }
+          
     $ionicModal.fromTemplateUrl('templates/comprarLibrosVistaModal.html', function(modal) {
         $scope.taskModal = modal;
       }, {
@@ -109,6 +119,71 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
       $scope.closeNewTask = function() {
         $scope.taskModal.hide();
       };
+
+      $scope.anadiraMisLibros = function(libro) {
+        var promesa = $q.defer();
+        var promises =[];  
+        $scope.getlibro=libro;
+        var url =libro.RutaThumbnails;
+      
+        $ionicLoading.show({
+            noBackdrop :false,
+            template: '<ion-spinner icon="spiral"></ion-spinner><br>Adquiriendo el libro'
+        });
+
+        $ionicPlatform.ready(function () {
+                var uuid = $cordovaDevice.getUUID();
+                Libros.query({search:'VerificarCodigo',libroId:libro.Id,uuid:uuid}, function(respuesta) {
+                if(!respuesta.data.length==0){
+
+                    console.log(respuesta);
+                    var targetPath = cordova.file.externalDataDirectory+libro.RutaThumbnails;
+                    promises.push($cordovaFileTransfer.download(url,targetPath, {}, true));
+
+                    $q.all(promises).then(function(res) {
+                            var Insertlibro = {
+                                id     : libro.Id, 
+                                nombre : libro.Nombre, 
+                                ruta   : libro.RutaThumbnails,
+                                width  : libro.Width,
+                                height : libro.Height
+                            };
+                            mislibros.add(Insertlibro);
+                            promesa.resolve("fin");
+                            $ionicLoading.hide();
+                            $scope.taskModal.hide();
+                           
+                                $cordovaToast.show("message", 'long', 'center');
+                                
+                           
+                              
+                    },function(err){
+                    $ionicLoading.hide();
+                    
+                    console.log(err);
+                    });
+            } else{
+                $ionicLoading.hide();
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error',
+                    template: "No cuentas con creditos para comprar libros"
+                    
+                });
+            }
+            }, function(error) {
+                $ionicLoading.hide(); 
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error',
+                    template: error.headers("Error")
+                    
+                });
+                
+            });
+        });
+}
+      $scope.BtnAtras = function() {
+        $state.go('tab.categorias');
+      } 
 
       $scope.LibrosModal = function(imagen) {
             try{

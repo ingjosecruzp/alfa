@@ -1,5 +1,15 @@
 <ion-view ng-init="IniciarBusqueda();">
+     
+        <div class="float-button" ng-click="BtnAtras()">
+                <span class="height-fix">
+                      <a class="content">
+                        <i class="ion-android-arrow-back"> </i>
+                       </a>
+                  </span>
+            </div>
+
   <ion-content>
+
       <div class="images">
               <div class="one-image" ng-repeat="libro in libros" ng-model="libros.Id">
                   <img src="{{libro.RutaThumbnails}}" class="image-rouder" width="100%" ng-click="newTask(libro)">
