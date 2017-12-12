@@ -1,0 +1,42 @@
+{
+  "name": "angular-progressbar.js",
+  "authors": [
+    "Daniel Olivares <danieloddl2@hotmail.com>"
+  ],
+  "description": "Progressbar.js AngularJS wrapper",
+  "main": "dist/angular-progressbar.js",
+  "moduleType": [],
+  "keywords": [
+    "angular",
+    "progress",
+    "progressbar",
+    "progressbarjs",
+    "circle",
+    "shape",
+    "animation"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/K1N5L4Y3R/angular-progressbar.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3",
+    "progressbar.js": "^1.0.0",
+    "jquery": "^2.2.3"
+  },
+  "_release": "4549f4a9b5",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4549f4a9b5438315a49179bde7dd65b1e85f30a7"
+  },
+  "_source": "https://github.com/K1N5L4Y3R/angular-progressbar.js.git",
+  "_target": "*",
+  "_originalSource": "angular-progressbar.js",
+  "_direct": true
+}

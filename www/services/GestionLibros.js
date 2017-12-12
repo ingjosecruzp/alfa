@@ -39,13 +39,13 @@ app.service('GestionLibros', function($ionicPlatform,$cordovaFileTransfer,movimi
                       $q.all(promises).then(function(res) {
                           $ionicLoading.hide();
                           response.data.forEach(function(record) {
-
                               var libro = {
                                   id     : record.libros.Id, 
                                   nombre : record.libros.Nombre, 
                                   ruta   : record.libros.RutaThumbnails,
                                   width  : record.libros.Width,
-                                  height : record.libros.Height
+                                  height : record.libros.Height,
+                                  codigo : codigo.Codigo
                               };
 
                               mislibros.add(libro);

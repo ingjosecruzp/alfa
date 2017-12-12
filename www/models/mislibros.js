@@ -17,8 +17,8 @@ app.factory('mislibros', function($cordovaSQLite, DBA) {
     }
   
     self.add = function(member) {
-      var parameters = [member.id,member.nombre,member.ruta,member.width,member.height];
-      return DBA.query("INSERT INTO libros (id, nombre,ruta,width,height) VALUES (?,?,?,?,?)", parameters);
+      var parameters = [member.id,member.nombre,member.ruta,member.width,member.height,member.codigo];
+      return DBA.query("INSERT INTO libros (id, nombre,ruta,width,height,codigo) VALUES (?,?,?,?,?,?)", parameters);
     }
   
     self.remove = function(member) {

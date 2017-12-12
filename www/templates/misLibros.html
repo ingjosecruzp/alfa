@@ -1,8 +1,26 @@
 <ion-view name="mislibros-view" ng-init="BtnCodigo()" cache-view="false">
-        <ion-content>
+        <ion-content>    
             <div class="images">
-                    <div class="one-image" ng-repeat="libro in Libros">
+                    <div class="one-image" ng-repeat="libro in Libros" ng-click="DescargarLibro(libro)">
+                        <!--progress-circle amount="75" color="#fffffe" fill="#565656" text="75" class="ProgresBar" stroke-width="5" trail-color="#565656" trail-width="8"></progress-circle>-->
+                        <round-progress class="ProgresBar"
+                        max="100"
+                        current="current"
+                        color="#fffffe"
+                        bgcolor="#565656"
+                        radius="25"
+                        stroke="20"
+                        semi="false"
+                        rounded="false"
+                        clockwise="true"
+                        responsive="false"
+                        duration="800"
+                        animation="easeInOutQuart"
+                        animation-delay="0"></round-progress>
                         <img ng-src="{{libro.ruta}}" class="image-rouder" width="100%">
+                        <a class="content">
+                            <i class="ion-arrow-down-a"> </i>
+                        </a>
                     </div>
             </div>
         </ion-content>
