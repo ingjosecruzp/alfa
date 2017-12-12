@@ -4,6 +4,7 @@ app.controller('MainController', function($scope,$ionicPopup,$state,$ionicPlatfo
  
         $scope.BtnCodigo = function() {
         try{
+            //Comentario Fede
            var acceso = Codigo.query($scope.librocodigo, function() {   
                         var alertPopup = $ionicPopup.alert({
                         title: 'Felicidades',
