@@ -3,7 +3,9 @@ app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlat
     $scope.codigos={};
 
     $scope.BtnCodigo = function() {
+        console.log("testdsadas");
         try{
+        
             $ionicLoading.show({
                 noBackdrop :false,
                 template: '<ion-spinner icon="spiral"></ion-spinner><br>Verificando codigo'
@@ -26,7 +28,7 @@ app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlat
                         case "Libre":
                             GestionLibros.CodigoLibre(codigo).then(function(rsp){
                                 console.log(rsp);
-                                /*$scope.TotalLibros=rsp.Total;*/
+                                //$scope.TotalLibros=rsp.Total;
                                 $scope.codigos={};
                             });
                             break;

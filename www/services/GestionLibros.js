@@ -1,4 +1,4 @@
-app.service('GestionLibros', function($ionicPlatform,$cordovaFileTransfer,movimientos,$ionicPopup,$q,$ionicLoading,$ionicPopup,Codigo,Variables,mislibros) {
+app.service('GestionLibros', function($ionicPlatform,$cordovaFileTransfer,movimientos,$ionicPopup,$q,$ionicLoading,$ionicPopup,$cordovaDevice,Codigo,Variables,mislibros) {
     /**
      * Existen tres formas distintas de códigos
      * Código paquete  : El código ya tiene precargado los libros
@@ -22,11 +22,21 @@ app.service('GestionLibros', function($ionicPlatform,$cordovaFileTransfer,movimi
                   alertPopup.then(function(res) {
                       var promises =[];
                   
+                      console.log("Test"+response.data);
                       console.log(response.data);
+                      
 
                       response.data.forEach(function(libro) {
                           var url = "http://"+Variables.IpServidor+"/cover/"+libro.libros.RutaThumbnails;
-                          var targetPath = cordova.file.externalDataDirectory+libro.libros.RutaThumbnails;
+
+                          var platform =$cordovaDevice.getPlatform();
+                          console.log(platform);
+                          if(platform=="Android"){
+                             var targetPath = cordova.file.externalDataDirectory+libro.libros.RutaThumbnails;
+                          }
+                          else{
+                             var targetPath = cordova.file.documentsDirectory+libro.libros.RutaThumbnails;
+                          }
                           promises.push($cordovaFileTransfer.download(url,targetPath, {}, true));
                       });
                       

@@ -9,7 +9,16 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
             mislibros.all().then(function(libros){
                 
                 libros.forEach(function(libro) {
-                    libro.ruta=cordova.file.externalDataDirectory + libro.ruta;
+
+                    var platform =$cordovaDevice.getPlatform();
+                    console.log(platform);
+                    if(platform=="Android"){
+                       libro.ruta=cordova.file.externalDataDirectory + libro.ruta;
+                    }
+                    else{
+                        libro.ruta=cordova.file.documentsDirectory + libro.ruta;
+                    }
+                    
                 });
 
                 $scope.Libros = libros;
