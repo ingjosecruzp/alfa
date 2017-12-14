@@ -40,7 +40,16 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
 
                 var url = "http://"+Variables.IpServidor+"/FileUploadServ.svc/Libro?identificador="+libro.id+"&UUID="+uuid+"&Codigo="+libro.codigo;
                 console.log(url);
-                var targetPath = cordova.file.externalDataDirectory+"Libro"+libro.id+".rar";
+
+                var platform =$cordovaDevice.getPlatform();
+                console.log(platform);
+                if(platform=="Android"){
+                    var targetPath = cordova.file.externalDataDirectory+"Libro"+libro.id+".rar";
+                }
+                else{
+                    var targetPath = cordova.file.documentsDirectory+"Libro"+libro.id+".rar";
+                }
+        
                 var trustHosts = true;
 
                 $cordovaFileTransfer.download(url, targetPath, {}, trustHosts).then(function(result) {
