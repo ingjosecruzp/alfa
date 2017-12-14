@@ -33,9 +33,8 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
     }
     $scope.DescargarLibro=function(libro){
         try{
-            //console.log(libro);
-            //$scope.current += 1;
-            $scope.current=0;
+            //$scope.current=0;
+            libro.current=0;
             $ionicPlatform.ready(function () {
                 var uuid = $cordovaDevice.getUUID();
 
@@ -47,15 +46,19 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
                 $cordovaFileTransfer.download(url, targetPath, {}, trustHosts).then(function(result) {
                   // Success!
                   console.log(result);
-                  $cordovaToast.show("Libro descargado", 'long', 'center');
                 }, function(err) {
                   // Error
                   console.log(err);
                 }, function (progress) {
                   $timeout(function () {
-                    console.log(progress.loaded);
-                    console.log(progress.total);
-                    $scope.current += (progress.loaded / progress.total) * 100;
+                    var downloadProgress = (progress.loaded / progress.total) * 100;
+                    libro.current +=downloadProgress-libro.current;
+                    if(libro.current >99.98)
+                        $cordovaToast.show("Libro descargado", 'long', 'center');
+                    /*var downloadProgress = (progress.loaded / progress.total) * 100;
+                    $scope.current +=downloadProgress-$scope.current;
+                    if($scope.current>99.98)
+                        $cordovaToast.show("Libro descargado", 'long', 'center');*/
                   });
                 });
             });
