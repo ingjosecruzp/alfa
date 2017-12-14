@@ -18,13 +18,14 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
                     else{
                         libro.ruta=cordova.file.documentsDirectory + libro.ruta;
                     }
-                    
+                    libro.FlechaVisible=true;
+                    libro.Spinner=false;
+                    libro.Descarga=true;
                 });
 
                 $scope.Libros = libros;
 
                 console.log($scope.Libros);
-                console.log("despues");
             });
         }
         catch(err){
@@ -33,9 +34,13 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
     }
     $scope.DescargarLibro=function(libro){
         try{
-            //$scope.current=0;
             libro.current=0;
             $ionicPlatform.ready(function () {
+                //Oculta la flecha de descarga
+                libro.FlechaVisible=false;
+                //Muestra el spinner antes de iniciar la descarga
+                libro.Spinner=true;
+
                 var uuid = $cordovaDevice.getUUID();
 
                 var url = "http://"+Variables.IpServidor+"/FileUploadServ.svc/Libro?identificador="+libro.id+"&UUID="+uuid+"&Codigo="+libro.codigo;
@@ -53,22 +58,26 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
                 var trustHosts = true;
 
                 $cordovaFileTransfer.download(url, targetPath, {}, trustHosts).then(function(result) {
-                  // Success!
-                  console.log(result);
+                    // Success!
+                    libro.Descarga=false;
+
+                    console.log(result);
                 }, function(err) {
-                  // Error
-                  console.log(err);
+                    // Error
+                    console.log(err);
                 }, function (progress) {
-                  $timeout(function () {
-                    var downloadProgress = (progress.loaded / progress.total) * 100;
-                    libro.current +=downloadProgress-libro.current;
-                    if(libro.current >99.98)
-                        $cordovaToast.show("Libro descargado", 'long', 'center');
-                    /*var downloadProgress = (progress.loaded / progress.total) * 100;
-                    $scope.current +=downloadProgress-$scope.current;
-                    if($scope.current>99.98)
-                        $cordovaToast.show("Libro descargado", 'long', 'center');*/
-                  });
+                    $timeout(function () {
+                        //Oculta el spinner al iniciar la descarga
+                        libro.Spinner=false;
+                        var downloadProgress = (progress.loaded / progress.total) * 100;
+                        libro.current +=downloadProgress-libro.current;
+                        if(libro.current >99.98)
+                            $cordovaToast.show("Libro descargado", 'long', 'center');
+                        /*var downloadProgress = (progress.loaded / progress.total) * 100;
+                        $scope.current +=downloadProgress-$scope.current;
+                        if($scope.current>99.98)
+                            $cordovaToast.show("Libro descargado", 'long', 'center');*/
+                    });
                 });
             });
         }
