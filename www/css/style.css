@@ -87,8 +87,29 @@
         column-count: 4;
         -webkit-column-count: 4; /* Chrome, Safari, Opera */
         -moz-column-count: 4; /* Firefox */
+        column-count: 3;
+        column-gap: 0px;
+    }
+    .one-image {
+        margin: 2px;
+        width: 230px;
+        position:relative;
+    }
+    
+}
+
+@media (min-width: 1024px) {
+    .images {
+        column-count: 4;
+        -webkit-column-count: 4; /* Chrome, Safari, Opera */
+        -moz-column-count: 4; /* Firefox */
         column-count: 4;
         column-gap: 0px;
+    }
+    .one-image {
+        margin: 2px;
+        width: 230px;
+        position:relative;
     }
     
 }

@@ -1,6 +1,7 @@
 <ion-view name="mislibros-view" ng-init="BtnCodigo()" cache-view="false">
         <ion-content>    
             <div class="images">
+                <center>
                     <div class="one-image" ng-repeat="libro in Libros" ng-click="DescargarLibro(libro)">
                         <!--progress-circle amount="75" color="#fffffe" fill="#565656" text="75" class="ProgresBar" stroke-width="5" trail-color="#565656" trail-width="8"></progress-circle>-->
                         <round-progress class="ProgresBar"
@@ -22,6 +23,7 @@
                             <i class="ion-arrow-down-a"></i>
                         </a>
                     </div>
+                </center>
             </div>
         </ion-content>
 </ion-view>

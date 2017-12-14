@@ -26,6 +26,15 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
       // App syntax
       db = $cordovaSQLite.openDB({ name: "alfabooks.db", iosDatabaseLocation:'default'}); 
     }
+
+    //Condición para tamaño de fuentes en tablet
+    if(window.isTablet){
+      console.log("Es tablet");
+
+      $rootScope.fuente = 1.5;
+    } else {
+        $rootScope.fuente = 1;
+    }
     
     //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS libros;');
     //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS movimientos;');
