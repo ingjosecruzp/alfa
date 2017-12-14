@@ -16,11 +16,13 @@
                         responsive="false"
                         duration="250"
                         animation="easeInOutQuart"
-                        animation-delay="0"></round-progress>
+                        animation-delay="0"
+                        ng-show="libro.Descarga"></round-progress>
                         <img ng-src="{{libro.ruta}}" class="image-rouder" width="100%">
-                        <a class="content">
+                        <a class="content" ng-show="libro.FlechaVisible">
                             <i class="ion-arrow-down-a"></i>
                         </a>
+                        <ion-spinner class="spinner" icon="android" ng-show="libro.Spinner"></ion-spinner>
                     </div>
             </div>
         </ion-content>
