@@ -30,10 +30,12 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
     //Condición para tamaño de fuentes en tablet
     if(window.isTablet){
       console.log("Es tablet");
-
       $rootScope.fuente = 1.5;
+      $rootScope.fuenteCategoria = 30;
     } else {
+      console.log("Es telefono");
         $rootScope.fuente = 1;
+        $rootScope.fuenteCategoria = 20;
     }
     
     //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS libros;');

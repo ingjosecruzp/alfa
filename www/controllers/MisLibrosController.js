@@ -14,9 +14,11 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
                     console.log(platform);
                     if(platform=="Android"){
                        libro.ruta=cordova.file.externalDataDirectory + libro.ruta;
+                       $scope.pixeles = 0;
                     }
                     else{
                         libro.ruta=cordova.file.documentsDirectory + libro.ruta;
+                       $scope.pixeles = 20;
                     }
                     libro.FlechaVisible=true;
                     libro.Spinner=false;

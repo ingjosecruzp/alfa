@@ -1,4 +1,4 @@
-app.controller('CategoriasController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Libros,Variables) {
+app.controller('CategoriasController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,$cordovaDevice,Libros,Variables) {
     $scope.data = {};
     $scope.libros={};
     
@@ -15,6 +15,17 @@ app.controller('CategoriasController', function($scope,$ionicPopup,$state,$ionic
        /*  $state.go('tab.chat-detail/1');*/
        
          $state.go('tab.comprarLibrosBuscar', {LibroaBuscar:$scope.libros.searchQuery});
+      }
+
+      $scope.DvPlataforma= function(){
+        
+        var platform =$cordovaDevice.getPlatform();
+        if(platform=="Android"){
+            $scope.pixeles = 0; 
+        }
+        else{
+            $scope.pixeles = 40;
+        }
       }
 
 });

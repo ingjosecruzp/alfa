@@ -1,6 +1,16 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope,$cordovaToast, Variables) {
+  $scope.CambioIp= function(){
+    if(Variables.IpServidor=='192.168.0.103:8080'){
+        Variables.IpServidor = '200.52.220.238:8091';           
+    }
+    else{
+        Variables.IpServidor = '192.168.0.103:8080';
+    }
+    $cordovaToast.show("Cambio de ip a:"+Variables.IpServidor, 'long', 'center');
+  }
+})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
