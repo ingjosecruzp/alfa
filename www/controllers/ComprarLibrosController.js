@@ -125,6 +125,8 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
         var promises =[];  
         $scope.getlibro=libro;
         var url =libro.RutaThumbnails;
+
+        console.log(libro);
       
         $ionicLoading.show({
             noBackdrop :false,
@@ -146,14 +148,15 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
                                 nombre : libro.Nombre, 
                                 ruta   : libro.RutaThumbnails,
                                 width  : libro.Width,
-                                height : libro.Height
+                                height : libro.Height,
+                                codigo : respuesta.data[0].codigos.Codigo
                             };
                             mislibros.add(Insertlibro);
                             promesa.resolve("fin");
                             $ionicLoading.hide();
                             $scope.taskModal.hide();
                            
-                            $cordovaToast.show("message", 'long', 'center');
+                            $cordovaToast.show("Felicidades has adquirido un libro", 'long', 'center');
                             $rootScope.showTab=false;  //Muestra la venta de mis libros
 
                              //hace un movimiento de salida para decrementar los creditos
