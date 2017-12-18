@@ -27,8 +27,8 @@ app.factory('mislibros', function($cordovaSQLite, DBA) {
     }
   
     self.update = function(origMember, editMember) {
-      var parameters = [editMember.id, editMember.name, origMember.id];
-      return DBA.query("UPDATE team SET id = (?), name = (?) WHERE id = (?)", parameters);
+      var parameters = [editMember.id, editMember.descargado, origMember.id];
+      return DBA.query("UPDATE libros SET id = (?), descargado = (?) WHERE id = (?)", parameters);
     }
   
     return self;
