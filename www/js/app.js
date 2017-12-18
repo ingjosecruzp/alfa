@@ -43,6 +43,11 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
     $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS libros (id PRIMARY KEY,nombre,ruta,width,height,codigo)');
     $cordovaSQLite.execute(db,"CREATE TABLE  IF NOT EXISTS movimientos (id INTEGER PRIMARY KEY AUTOINCREMENT,codigo VARCHAR (40) NOT NULL,entrada INTEGER,salida INTEGER);")
 
+    //variable para la notificacion del tab 4 tipoglobe
+    movimientos.SaldoLibros().then(function(saldo){
+        $rootScope.notificacionglobo=saldo.Total==null ? "0" :saldo.Total;
+    });
+
     mislibros.all().then(function(libros){
       //Si el usuario no cuenta con ningun libro lo manda a la ventana de ingresar codigo
       console.log("numero del libros="+ libros.length)
