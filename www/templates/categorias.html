@@ -1,6 +1,6 @@
-<ion-view name="codigo-view" ng-init="DvPlataforma()">
+<ion-view name="codigo-view" ng-init="DvPlataforma()" >
     
-    <div class="bar bar-header item-input-inset">
+    <div class="bar bar-header item-input-inset" style="background-image: none;">
         <label class="item-input-wrapper">
             <input type="search" placeholder="Buscar" ng-model="libros.searchQuery" ng-enter="BtnBuscar();">
           <i class="icon ion-ios-search placeholder-icon"></i>
@@ -21,7 +21,7 @@
 
       </div>
       <ion-list no-lines>
-        <ion-item ng-model="categorias.id" ng-repeat="categorias in listacategorias"  style="border-color:rgba(221, 221, 221, 0);font-weight: bold; font-size: {{fuenteCategoria}}px;"  href="#/tab/categorias/{{categorias.id}}">
+        <ion-item ng-model="categorias.id" class="stylecategorias" ng-repeat="categorias in listacategorias"  style="border-color:rgba(221, 221, 221, 0);font-weight: bold; font-size: {{fuenteCategoria}}px;"  href="#/tab/categorias/{{categorias.id}}">
           {{categorias.name}}
         </ion-item>
 

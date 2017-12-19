@@ -167,6 +167,12 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
                             }
                     
                             movimientos.add(movimiento);
+
+                              //variable para la notificacion del tab 4 tipoglobe
+                            movimientos.SaldoLibros().then(function(saldo){
+                                $rootScope.notificacionglobo=saldo.Total==null ? "0" :saldo.Total;
+                            });
+
                               
                     },function(err){
                     $ionicLoading.hide();

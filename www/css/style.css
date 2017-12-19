@@ -64,6 +64,9 @@
         width: 159px;
         position:relative;
     }
+    .stylecategorias{
+        margin: 0px;
+    }
 }
 
 @media (min-width: 420px) {
@@ -80,6 +83,9 @@
         width: 192px;
         position:relative;
     }
+    .stylecategorias{
+        margin: 20px;
+    }
 }
 
 @media (min-width: 720px) {
@@ -94,6 +100,9 @@
         margin: 2px;
         width: 230px;
         position:relative;
+    }
+    .stylecategorias{
+        margin: 50px;
     }
     
 }

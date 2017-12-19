@@ -35,6 +35,10 @@ app.controller('IngresarCodigosController', function($scope,$ionicPopup,$state,$
                                 $scope.TotalLibros=rsp.Total;
                                 $scope.codigos={};
                             });
+                              //variable para la notificacion del tab 4 tipoglobe
+                                movimientos.SaldoLibros().then(function(saldo){
+                                    $rootScope.notificacionglobo=saldo.Total==null ? "0" :saldo.Total;
+                                });
                             break;
                         case "Combinado":
                             GestionLibros.CodigoCombinado();
