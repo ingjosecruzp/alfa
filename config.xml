@@ -89,4 +89,5 @@
     <plugin name="cordova-sqlite-storage" spec="git+https://github.com/litehelpers/Cordova-sqlite-storage.git#storage-master" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
     <plugin name="uk.co.workingedge.phonegap.plugin.istablet" spec="^1.2.0" />
+    <plugin name="cordova-plugin-zip" spec="https://github.com/MobileChromeApps/zip.git" />
 </widget>

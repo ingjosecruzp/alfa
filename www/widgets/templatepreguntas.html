@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<!--Ionic css-->
+	<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+	<!--Ionic-->
+	<script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+	<!--Angular
+    <script src="assets/angular.min.js"></script>
+    <script src="assets/angular-animate.min.js"></script>
+    <script src="assets/angular-sanitize.min.js"></script>
+    <script src="assets/angular-ui-router.min.js"></script>-->
+</head>
+<body ng-app="quiz" ng-controller="quizController" >
+	<form>
+		   <!--<div ng-repeat="pregunta in Preguntas">
+		   		<p>{{pregunta.Pregunta}}</p>
+		   		<div ng-repeat="opcion in pregunta.Opciones">
+		   			<input type="radio" name="{{pregunta.Numero}}" value="male"><label for="genderChoice1">{{opcion.Respuesta}}</label><br>
+		   		</div>
+			</div>-->
+			<ion-item ng-repeat="pregunta in Preguntas">
+			    <ion-label>{{pregunta.Pregunta}}</ion-label>
+			    <div ng-repeat="opcion in pregunta.Opciones">
+			    	<!--<ion-radio checked="true" ng-model="{{pregunta.Numero}}" ng-value="{{opcion.Respuesta}}">{{opcion.Respuesta}}</ion-radio>-->
+			    	<ion-radio checked="true" name="{{pregunta.Numero}}" value="{{opcion.Respuesta}}">{{opcion.Respuesta}}</ion-radio>
+			    </div>
+		  	</ion-item>
+	</form>
+</body>
+</html>
+<script>
+	var app=angular.module('quiz',['ionic'])
+
+	app.controller('quizController',function($scope){
+		/*$scope.Preguntas=[
+				{Numero:1,Pregunta: "¿Cuanto es 2 + 2?",Opciones:[{Opcion:1,Respuesta: "5"},{Opcion:2,Respuesta: "10"},{Opcion:3,Respuesta: "4"},{Opcion:4,Respuesta: "9"}]},
+				{Numero:2,Pregunta: "¿Cuanto es 0 * 0?",Opciones:[{Opcion:1,Respuesta: "12"},{Opcion:2,Respuesta: "100"},{Opcion:3,Respuesta: "500"},{Opcion:4,Respuesta: "0"}]}
+		];*/
+
+		/*$scope.Preguntas=JSON.parse('[{"Numero":1,"Pregunta":"¿Cuanto es 2 + 2?","Opciones":[{"Opcion":1,"Respuesta":"5"},{"Opcion":1,"Respuesta":"10"},{"Opcion":1,"Respuesta":"4"},{"Opcion":1,"Respuesta":"9"}]},{"Numero":1,"Pregunta":"¿Cuanto es 0 * 0?","Opciones":[{"Opcion":1,"Respuesta":"12"},{"Opcion":1,"Respuesta":"100"},{"Opcion":1,"Respuesta":"500"},{"Opcion":1,"Respuesta":"0"}]}]')*/
+
+		$scope.Preguntas=JSON.parse('[{"Numero":1,"Pregunta":"¿2 +2?","Opciones":[{"Opcion":1,"Respuesta":"5"},{"Opcion":1,"Respuesta":"9"},{"Opcion":1,"Respuesta":"4"},{"Opcion":1,"Respuesta":"2"}]},{"Numero":2,"Pregunta":"0*0","Opciones":[{"Opcion":1,"Respuesta":"5"},{"Opcion":1,"Respuesta":"6"},{"Opcion":1,"Respuesta":"9"},{"Opcion":1,"Respuesta":"0"}]}]')
+	})
+</script>	

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<!--Ionic css-->
+	<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+	<!--Ionic-->
+	<script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+	 <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+
+	 <script src="../../../cordova.js"></script>
+	
+	<!--Angular
+    <script src="assets/angular.min.js"></script>
+    <script src="assets/angular-animate.min.js"></script>
+    <script src="assets/angular-sanitize.min.js"></script>
+    <script src="assets/angular-ui-router.min.js"></script>-->
+</head>
+<body ng-app="quiz" ng-controller="quizController" >
+      <div class="item item-image">
+          <img src="img/camera.png" id="myImage" ng-click="TomarFoto()">
+      </div>
+</body>
+</html>
+<script>
+	var app=angular.module('quiz',['ionic','ngCordova'])
+
+	app.controller('quizController',function($scope,$cordovaCamera,$ionicPlatform){
+		$scope.TomarFoto = function () {
+	        $ionicPlatform.ready(function () {
+
+	            var options = {
+	                destinationType: Camera.DestinationType.FILE_URI,
+	                sourceType: Camera.PictureSourceType.CAMERA,
+	                /*quality: 80,
+	                targetWidth: 465,
+	                targetHeight: 357,*/
+	            };
+
+	            $cordovaCamera.getPicture(options).then(function (imageURI) {
+	                var image = document.getElementById('myImage');
+	                image.src = imageURI;
+	            }, function (err) {
+	                // error
+	            });
+	        });
+	    };
+	})
+</script>	
