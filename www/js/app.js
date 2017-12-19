@@ -40,7 +40,7 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
     
     //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS libros;');
     //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS movimientos;');
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS libros (id PRIMARY KEY,nombre,ruta,width,height,codigo,descargado DEFAULT "NO")');
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS libros (id PRIMARY KEY,nombre,ruta,width,height,codigo,descargado DEFAULT "NO",pathlibro)');
     $cordovaSQLite.execute(db,"CREATE TABLE  IF NOT EXISTS movimientos (id INTEGER PRIMARY KEY AUTOINCREMENT,codigo VARCHAR (40) NOT NULL,entrada INTEGER,salida INTEGER);")
 
     //variable para la notificacion del tab 4 tipoglobe
