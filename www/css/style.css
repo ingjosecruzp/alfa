@@ -65,7 +65,8 @@
         position:relative;
     }
     .stylecategorias{
-        margin: 0px;
+        padding-bottom: 0px;
+        font-size: 20px;
     }
 }
 
@@ -84,7 +85,8 @@
         position:relative;
     }
     .stylecategorias{
-        margin: 20px;
+        padding-bottom: 20px;
+        font-size: 25px;
     }
 }
 
@@ -102,7 +104,8 @@
         position:relative;
     }
     .stylecategorias{
-        margin: 50px;
+        padding-bottom: 50px;
+        font-size: 28px;
     }
     
 }

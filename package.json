@@ -25,7 +25,8 @@
     "cordova-plugin-x-toast": "^2.6.0",
     "cordova-sqlite-storage": "git+https://github.com/litehelpers/Cordova-sqlite-storage.git#storage-master",
     "ionic-plugin-keyboard": "^2.2.1",
-    "uk.co.workingedge.phonegap.plugin.istablet": "^1.2.0"
+    "uk.co.workingedge.phonegap.plugin.istablet": "^1.2.0",
+    "cordova-plugin-zip": "https://github.com/MobileChromeApps/zip.git"
   },
   "cordova": {
     "plugins": {
@@ -37,7 +38,8 @@
       "cordova-plugin-file-transfer": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-x-toast": {},
-      "uk.co.workingedge.phonegap.plugin.istablet": {}
+      "uk.co.workingedge.phonegap.plugin.istablet": {},
+      "cordova-plugin-zip": {}
     },
     "platforms": [
       "android"
