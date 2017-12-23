@@ -19,7 +19,7 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      StatusBar.overlaysWebView(false);
     }
 
     if(window.cordova) {

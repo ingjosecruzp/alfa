@@ -68,6 +68,7 @@
         padding-bottom: 0px;
         font-size: 20px;
     }
+
 }
 
 @media (min-width: 420px) {
@@ -85,9 +86,30 @@
         position:relative;
     }
     .stylecategorias{
-        padding-bottom: 20px;
+        padding-bottom: 5px;
         font-size: 25px;
     }
+   /*Estilos para la barra de búsqueda*/
+   .bar-header{
+    height: 200px;
+    }
+    .item-input-wrapper{
+        height: 60px;
+    }
+
+    #inputbusqueda::-webkit-input-placeholder{
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+    #inputbusqueda{
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+    /*Estilo de div para que la barra de busqueda y als categorìas queden separados*/
+    .espaciocategorias{
+        height: 40px;
+    }
+
 }
 
 @media (min-width: 720px) {
@@ -104,8 +126,63 @@
         position:relative;
     }
     .stylecategorias{
-        padding-bottom: 50px;
-        font-size: 28px;
+        padding-bottom: 10px;
+        font-size: 33px;
+    }
+    /*Estilos para la barra de búsqueda*/
+    .bar-header{
+        height: 90px;
+    }                
+    .item-input-wrapper{
+        height: 60px;
+    }
+
+    #inputbusqueda::-webkit-input-placeholder{
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+    #inputbusqueda{
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+    /*Estilo de div para que la barra de busqueda y als categorìas queden separados*/
+    .espaciocategorias{
+        height: 40px;
+    }
+    /*Estilo para el número del tab de código*/
+    .creditos{
+        font-size: 50px;
+    }
+    /*Estilos para texto de ingresar código*/
+    .fuentecodigo{
+        font-size: 20px;
+        line-height: 30px;        
+    }
+    #anchotexto{
+        width: 55%;
+        border: 1px solid black;
+        }
+    
+    /*Estilos para input de ingresar código*/
+    #inputcodigo{
+        width: 50%;
+        font-size: 20px;
+        margin-bottom: 0px;
+    }
+    #inputcodigo::-webkit-input-placeholder{
+        font-size: 20px;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+
+    /*Estilo para botón de aceptar en  ingresar código*/
+    #botoncodigo{
+        width: 50%;
+        font-size: 20px;
+    }
+
+    #espaciocodigo{
+        height: 10px;
     }
     
 }
@@ -123,7 +200,34 @@
         width: 230px;
         position:relative;
     }
-    
+    .stylecategorias{
+        padding-bottom: 20px;
+        font-size: 40px;
+    }
+     /*Estilos para la barra de búsqueda*/
+    .bar-header{
+        height: 90px;
+    }
+    .item-input-wrapper{
+        height: 60px;
+    }
+
+    #inputbusqueda::-webkit-input-placeholder{
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+    #inputbusqueda{
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+    /*Estilo de div para que la barra de busqueda y als categorìas queden separados*/
+    .espaciocategorias{
+        height: 45px;
+    }
+     /*Estilo para el número del tab de código*/
+     .creditos{
+        font-size: 55px;
+    }
 }
 
 .image-rouder{

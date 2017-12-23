@@ -24,7 +24,7 @@ app.controller('CategoriasController', function($scope,$ionicPopup,$state,$ionic
             $scope.pixeles = 0; 
         }
         else{
-            $scope.pixeles = 40;
+            $scope.pixeles = 50;
         }
       }
 

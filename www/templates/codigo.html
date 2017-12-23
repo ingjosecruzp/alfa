@@ -1,21 +1,25 @@
 <ion-view name="codigo-view">
   <ion-content  class="center">
+      <center>
         <div class="row">
-          <div class="col text-center" style="font-size: {{fuente}}em;">
-            <p style="line-height:100%;">Aún no cuentas con ningún libro, para adquirirlos ingresa tu código de n dígitos</p>
+          <div class="col text-center fuentecodigo">
+            <p id="textoc"style="line-height:100%;">Aún no cuentas con ningún libro, para adquirirlos ingresa tu código de n dígitos</p>
           </div>
         </div>
+      </center>
+      <div id="espaciocodigo"></div>
         <div class="row">
           <div class="col">
             <center>
-              <input type="text" name="txtCodigo"  ng-enter="BtnCodigo();" ng-model="codigos.codigo" placeholder="Ingresa tu codigo" style="text-align:center;border: 0;border-bottom: 1px solid rgb(85, 79, 79);outline: 0;">
+              <input id="inoutcodigo"type="text" name="txtCodigo"  ng-enter="BtnCodigo();" ng-model="codigos.codigo" placeholder="Ingresa tu codigo" style="font-size:20px; text-align:center;border: 0;border-bottom: 1px solid rgb(85, 79, 79);outline: 0;">
             </center>
           </div>
         </div>
+        <div id="espaciocodigo"></div>
         <div class="row">
           <div class="col">
             <center>
-              <button class="button button-block button-positive" style="width:70%;" ng-click="BtnCodigo();" ng-disabled="FrmRegistro.$invalid || savingfrm == true">
+              <button class="button button-block button-positive" id="botoncodigo" ng-click="BtnCodigo();" ng-disabled="FrmRegistro.$invalid || savingfrm == true">
                   Aceptar
               </button>
             </center>
