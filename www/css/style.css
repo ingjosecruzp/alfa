@@ -66,8 +66,12 @@
     }
     .stylecategorias{
         padding-bottom: 0px;
-        font-size: 20px;
+        font-size: 24px;
     }
+    .item-input-wrapper{
+        height: 40px;
+    }
+
 
 }
 
@@ -87,14 +91,14 @@
     }
     .stylecategorias{
         padding-bottom: 5px;
-        font-size: 25px;
+        font-size: 28px;
     }
    /*Estilos para la barra de búsqueda*/
    .bar-header{
     height: 200px;
     }
     .item-input-wrapper{
-        height: 60px;
+        height: 40px;
     }
 
     #inputbusqueda::-webkit-input-placeholder{
@@ -107,7 +111,7 @@
     }
     /*Estilo de div para que la barra de busqueda y als categorìas queden separados*/
     .espaciocategorias{
-        height: 40px;
+        height: 10px;
     }
 
 }
@@ -134,7 +138,7 @@
         height: 90px;
     }                
     .item-input-wrapper{
-        height: 60px;
+        height: 40px;
     }
 
     #inputbusqueda::-webkit-input-placeholder{
@@ -147,7 +151,7 @@
     }
     /*Estilo de div para que la barra de busqueda y als categorìas queden separados*/
     .espaciocategorias{
-        height: 40px;
+        height: 10px;
     }
     /*Estilo para el número del tab de código*/
     .creditos{
