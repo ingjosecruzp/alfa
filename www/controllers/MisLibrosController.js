@@ -94,9 +94,10 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
 
                 $cordovaFileTransfer.download(url, targetPath, {}, trustHosts).then(function(result) {
                     // Success!
-                    libro.Descarga=false;
-                    $cordovaToast.show("Libro descargado", 'long', 'center');
-                    //console.log(result);
+                    $cordovaToast.show("Espere un momento....", 'long', 'center');
+                    libro.current={};
+                    //libro.Descarga=false;
+
                     //Manda descomprir el libro
                     $cordovaZip.unzip(targetPath,targetunzip).then(function () {
                         console.log('descomprimido');
@@ -117,6 +118,8 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
                         libro.descargado="SI";
                         libro.pathlibro=targetunzip;
                         libro.disabled=false;
+                        libro.Spinner=false;
+                        libro.Descarga=false;
 
                         var DescargasActuales=$scope.Libros.find(x => x.disabled === true);
                         console.log(DescargasActuales);
@@ -125,14 +128,16 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
                                 console.log("entro false cache");
                                 $scope.Descargando=false;
                         }
-
+                        
+                        $cordovaToast.show("Libro descargado", 'long', 'center');
                         //Manda visualizar el libro
                         //location.href = targetunzip+'/index.html';
                     }, function () {
-                        console.log('error');
                         $cordovaToast.show('Error al descomprimir el libro', 'long', 'center');
                     }, function (progressEvent) {
                         //console.log(progressEvent);
+                        //Muestra el spinner antes de descomprimir
+                        libro.Spinner=true;
                     });
 
                 }, function(err) {
@@ -147,9 +152,6 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
                         libro.disabled=true;
                         var downloadProgress = (progress.loaded / progress.total) * 100;
                         libro.current +=downloadProgress-libro.current;
-
-                        //if($scope.current>99.98)
-                           
                     });
                 });
             });
