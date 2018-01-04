@@ -211,6 +211,6 @@ app.service('Servicios', function() {
 //Variables Globales
 app.value('Variables',{
   IpServidor: '200.52.220.238:8091'
-  //IpServidor: '192.168.1.69:8080'
+  //IpServidor: '192.168.1.75:8080'
 });
 
