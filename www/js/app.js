@@ -21,12 +21,19 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
       // org.apache.cordova.statusbar required
       StatusBar.overlaysWebView(false);
     }
-
+    console.log("linea 25 if window.cordova") ;
     if(window.cordova) {
       // App syntax
       db = $cordovaSQLite.openDB({ name: "alfabooks.db", iosDatabaseLocation:'default'}); 
+      console.log("linea 25 if window.cordova") ;
     }
-
+    if (device.platform == "iOS") {
+      console.log("platform: " +device.platform) ;
+      ionic.Platform.fullScreen();
+      if (window.StatusBar) {
+        return StatusBar.hide();
+      }
+    }
     //Condición para tamaño de fuentes en tablet
     if(window.isTablet){
       console.log("Es tablet");

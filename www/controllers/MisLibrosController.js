@@ -1,4 +1,4 @@
-app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$state,$ionicPlatform,$ionicLoading,$cordovaFileTransfer,Codigo,$cordovaSQLite,mislibros,$cordovaDevice,Variables,$cordovaToast,$cordovaZip,$ionicModal) {
+app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$state,$ionicPlatform,$ionicLoading,$cordovaInAppBrowser,$cordovaFileTransfer,Codigo,$cordovaSQLite,mislibros,$cordovaDevice,Variables,$cordovaToast,$cordovaZip,$ionicModal) {
     $scope.data = {};
     $scope.Libros={};
     $scope.current=0;
@@ -6,6 +6,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
  
     $scope.BtnCodigo = function() {
         try{
+            console.log("Muesta libros");
             $scope.current=0;
             mislibros.all().then(function(libros){
                 
@@ -51,7 +52,38 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
         try{
             console.log("entro a visualizar libro");
             console.log(libro);
-            location.href = libro.pathlibro+'/index.html';
+            console.log(libro.pathlibro+'/index.html');
+            //location.href = libro.pathlibro+'/index.html';
+
+            console.log("entro app browser");
+            var options = {
+                location           : 'no',
+                clearcache         : 'yes',
+                toolbar            : 'no',
+                zoom               : 'yes',
+                EnableViewPortScale: 'yes'
+            };
+        
+            document.addEventListener("deviceready", function () {
+                $cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_blank', options)
+                //$cordovaInAppBrowser.open('/Documents/Libro2/index.html', '_blank', options)
+                .then(function(event) {
+                    // success
+                    console.log(event);
+                })
+                .catch(function(event) {
+                    // error
+                    console.log(event);
+                });
+        
+        
+                //$cordovaInAppBrowser.close();
+        
+            }, false);
+            $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
+                console.log(e);
+            });
+          
         }
         catch(err){
             console.log(err);

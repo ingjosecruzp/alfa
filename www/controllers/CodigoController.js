@@ -1,9 +1,8 @@
 app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlatform,$ionicLoading,Codigo,$state,$cordovaDevice,$cordovaFileTransfer,$q,$cordovaSQLite,$rootScope,mislibros,Variables,GestionLibros) {
     $scope.data = {};
     $scope.codigos={};
-
     $scope.BtnCodigo = function() {
-        console.log("testdsadas");
+        console.log("codigo controller");
         try{
         
             $ionicLoading.show({

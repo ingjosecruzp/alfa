@@ -14,11 +14,12 @@
   },
   "dependencies": {
     "angulargrid": "^0.6.5",
-    "cordova-android": "^6.3.0",
+    "cordova-android": "6.3.0",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-file": "^5.0.0",
     "cordova-plugin-file-transfer": "^1.7.0",
+    "cordova-plugin-inappbrowser": "^2.0.1",
     "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-statusbar": "^2.3.0",
     "cordova-plugin-whitelist": "^1.3.3",
@@ -39,7 +40,8 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-x-toast": {},
       "uk.co.workingedge.phonegap.plugin.istablet": {},
-      "cordova-plugin-zip": {}
+      "cordova-plugin-zip": {},
+      "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
       "android"
