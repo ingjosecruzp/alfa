@@ -27,13 +27,7 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
       db = $cordovaSQLite.openDB({ name: "alfabooks.db", iosDatabaseLocation:'default'}); 
       console.log("linea 25 if window.cordova") ;
     }
-    if (device.platform == "iOS") {
-      console.log("platform: " +device.platform) ;
-      ionic.Platform.fullScreen();
-      if (window.StatusBar) {
-        return StatusBar.hide();
-      }
-    }
+ 
     //Condición para tamaño de fuentes en tablet
     if(window.isTablet){
       console.log("Es tablet");
@@ -69,6 +63,13 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
       //Si el usuario no cuenta con ningun libro lo manda a la ventana de ingresar codigo
       console.log(mov)
     });
+    if (device.platform == "iOS") {
+      console.log("platform: " +device.platform) ;
+      ionic.Platform.fullScreen();
+      if (window.StatusBar) {
+        return StatusBar.hide();
+      }
+    }
 
   });
 });

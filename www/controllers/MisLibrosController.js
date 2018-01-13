@@ -1,4 +1,4 @@
-app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$state,$ionicPlatform,$ionicLoading,$cordovaInAppBrowser,$cordovaFileTransfer,Codigo,$cordovaSQLite,mislibros,$cordovaDevice,Variables,$cordovaToast,$cordovaZip,$ionicModal) {
+app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$timeout,$state,$ionicPlatform,$ionicLoading,$cordovaInAppBrowser,$cordovaFileTransfer,Codigo,$cordovaSQLite,mislibros,$cordovaDevice,Variables,$cordovaToast,$cordovaZip,$ionicModal) {
     $scope.data = {};
     $scope.Libros={};
     $scope.current=0;
@@ -9,18 +9,15 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
             console.log("Muesta libros");
             $scope.current=0;
             mislibros.all().then(function(libros){
-                
                 libros.forEach(function(libro) {
 
                     var platform =$cordovaDevice.getPlatform();
                     console.log(platform);
                     if(platform=="Android"){
                        libro.ruta=cordova.file.externalDataDirectory + libro.ruta;
-                       $scope.pixeles = 0;
                     }
                     else{
                         libro.ruta=cordova.file.documentsDirectory + libro.ruta;
-                       $scope.pixeles = 20;
                     }
                     //Valida si ya se encuntra descargado el libro o no
                     if(libro.descargado=="NO")
@@ -43,10 +40,13 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
 
                 console.log($scope.Libros);
             });
+            console.log("entro despues");
         }
         catch(err){
             console.log(err);
+            $cordovaToast.show(err, 'long', 'center');
         }
+        console.log("despues de los libros");
     }
     $scope.VisualizarLibro=function(libro){
         try{
@@ -63,7 +63,8 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
                 zoom               : 'yes',
                 EnableViewPortScale: 'yes'
             };
-        
+            
+
             document.addEventListener("deviceready", function () {
                 $cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_blank', options)
                 //$cordovaInAppBrowser.open('/Documents/Libro2/index.html', '_blank', options)
@@ -80,6 +81,14 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$timeout,$stat
                 //$cordovaInAppBrowser.close();
         
             }, false);
+
+        
+            $rootScope.$on('$cordovaInAppBrowser:loadstop', function(e, event){
+                if (event.url.match("mobile/close")) {
+                    $cordovaInAppBrowser.close();
+                }
+              });
+
             $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
                 console.log(e);
             });
