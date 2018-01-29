@@ -10,7 +10,7 @@ app.controller('CodigoController', function($scope,$ionicPopup,$state,$ionicPlat
                 template: '<ion-spinner icon="spiral"></ion-spinner><br>Verificando codigo'
             });
             $ionicPlatform.ready(function () {
-                var uuid = $cordovaDevice.getUUID();
+                var uuid=$rootScope.uuid;
                 var acceso = Codigo.query({search:'VerificarCodigo',codigo:$scope.codigos.codigo,uuid:uuid}, function(response) {
                     var codigo=response.data[0];
                     

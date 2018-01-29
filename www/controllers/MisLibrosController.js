@@ -6,7 +6,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
  
     $scope.BtnCodigo = function() {
         try{
-            console.log("Muesta libros");
+            console.log("Muestra libros");
             $scope.current=0;
             mislibros.all().then(function(libros){
                 libros.forEach(function(libro) {
@@ -59,15 +59,15 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
             var options = {
                 location           : 'no',
                 clearcache         : 'yes',
-                toolbar            : 'no',
+                toolbar            : 'yes',
                 zoom               : 'yes',
-                EnableViewPortScale: 'yes'
+                EnableViewPortScale: 'yes',
+                closebuttoncaption : 'Cerrar'
             };
             
 
             document.addEventListener("deviceready", function () {
                 $cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_blank', options)
-                //$cordovaInAppBrowser.open('/Documents/Libro2/index.html', '_blank', options)
                 .then(function(event) {
                     // success
                     console.log(event);
@@ -76,22 +76,19 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                     // error
                     console.log(event);
                 });
-        
-        
+
                 //$cordovaInAppBrowser.close();
+                $rootScope.$on('$cordovaInAppBrowser:loadstop', function(e, event){
+                    if (event.url.match("assets/cerrar.html")) {
+                            $cordovaInAppBrowser.close();
+                    }
+                  });
+    
+                $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
+                    console.log(e);
+                });
         
             }, false);
-
-        
-            $rootScope.$on('$cordovaInAppBrowser:loadstop', function(e, event){
-                if (event.url.match("mobile/close")) {
-                    $cordovaInAppBrowser.close();
-                }
-              });
-
-            $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
-                console.log(e);
-            });
           
         }
         catch(err){
@@ -115,7 +112,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                 //Muestra el spinner antes de iniciar la descarga
                 libro.Spinner=true;
 
-                var uuid = $cordovaDevice.getUUID();
+                var uuid=$rootScope.uuid;
 
                 var url = "http://"+Variables.IpServidor+"/FileUploadServ.svc/Libro?identificador="+libro.id+"&UUID="+uuid+"&Codigo="+libro.codigo;
                 console.log(url);
@@ -174,7 +171,14 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                         //Manda visualizar el libro
                         //location.href = targetunzip+'/index.html';
                     }, function () {
-                        $cordovaToast.show('Error al descomprimir el libro', 'long', 'center');
+                        $cordovaToast.show('Error en la descarga del libro, intentalo de nuevo', 'long', 'center');
+
+                        //si surge un error en la descarga reiniciar el estado de libro
+                        libro.FlechaVisible=true;
+                        libro.Spinner=false;
+                        libro.Descarga=true;
+                        libro.disabled=false;
+                        libro.current={};
                     }, function (progressEvent) {
                         //console.log(progressEvent);
                         //Muestra el spinner antes de descomprimir

@@ -16,6 +16,7 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
                     $ionicLoading.hide();   
                     respuesta.data.forEach(function(libro) {
                         libro.libros.RutaThumbnails="http://"+Variables.IpServidor+"/cover/"+libro.libros.RutaThumbnails;
+                        libro.libros.RutaImgResena="http://"+Variables.IpServidor+"/cover/resena/"+libro.libros.RutaImgResena;
                         $scope.libros.push(libro);
                     });
                     
@@ -50,6 +51,7 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
 
                     respuesta.data.forEach(function(libro) {
                         libro.RutaThumbnails="http://"+Variables.IpServidor+"/cover/"+libro.RutaThumbnails;
+                        libro.RutaImgResena="http://"+Variables.IpServidor+"/cover/resena/"+libro.RutaImgResena;
                         $scope.libros.push(libro);
                     });
                     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -134,12 +136,21 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
         });
 
         $ionicPlatform.ready(function () {
-                var uuid = $cordovaDevice.getUUID();
+                var uuid=$rootScope.uuid;
+           
                 Libros.query({search:'VerificarCodigo',libroId:libro.Id,uuid:uuid}, function(respuesta) {
                 if(!respuesta.data.length==0){
 
                     console.log(respuesta);
-                    var targetPath = cordova.file.externalDataDirectory+libro.RutaThumbnails;
+                    var platform =$cordovaDevice.getPlatform();
+              
+                    if(platform=="Android"){
+                        var targetPath = cordova.file.externalDataDirectory+libro.RutaThumbnails;
+                    }
+                    else{
+                        var targetPath = cordova.file.documentsDirectory+libro.RutaThumbnails;
+                    }
+                  
                     promises.push($cordovaFileTransfer.download(url,targetPath, {}, true));
 
                     $q.all(promises).then(function(res) {

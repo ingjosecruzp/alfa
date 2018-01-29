@@ -101,14 +101,14 @@
         height: 40px;
     }
 
-    #inputbusqueda::-webkit-input-placeholder{
+  /*  #inputbusqueda::-webkit-input-placeholder{
         font-size: 25px;
         margin-bottom: 0px;
     }
     #inputbusqueda{
-        font-size: 25px;
+        font-size: 20px;
         margin-bottom: 0px;
-    }
+    }/*
     /*Estilo de div para que la barra de busqueda y als categorìas queden separados*/
     .espaciocategorias{
         height: 10px;
@@ -141,14 +141,14 @@
         height: 40px;
     }
 
-    #inputbusqueda::-webkit-input-placeholder{
+   /* #inputbusqueda::-webkit-input-placeholder{
         font-size: 25px;
-        margin-bottom: 0px;
+        margin-bottom: -20px;
     }
     #inputbusqueda{
-        font-size: 25px;
+        font-size: 20px;
         margin-bottom: 0px;
-    }
+    }*/
     /*Estilo de div para que la barra de busqueda y als categorìas queden separados*/
     .espaciocategorias{
         height: 10px;
@@ -164,8 +164,8 @@
     }
     #anchotexto{
         width: 55%;
-        border: 1px solid black;
-        }
+        /*border: 1px solid black;*/
+    }
     
     /*Estilos para input de ingresar código*/
     #inputcodigo{
@@ -303,3 +303,48 @@
     font-size: 17px;
     stroke: white;
   }
+
+  /*modal modificado para tables*/
+  .modalmodificado {
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    overflow: hidden;
+    min-height: 100%;
+    width: 100%;
+    background-color: #fff; }
+  
+  @media (min-width: 680px) {
+    .modalmodificado {
+      top: 10%;
+      right: 10%;
+      bottom: 10%;
+      left: 15%;
+      min-height: 240px;
+      width: 70%; }
+    .modal.ng-leave-active {
+      bottom: 0; }
+    .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) {
+      height: 44px; }
+      .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) > * {
+        margin-top: 0; }
+    .platform-ios.platform-cordova .modal-wrapper .modal .tabs-top > .tabs,
+    .platform-ios.platform-cordova .modal-wrapper .modal .tabs.tabs-top {
+      top: 44px; }
+    .platform-ios.platform-cordova .modal-wrapper .modal .has-header,
+    .platform-ios.platform-cordova .modal-wrapper .modal .bar-subheader {
+      top: 44px; }
+    .platform-ios.platform-cordova .modal-wrapper .modal .has-subheader {
+      top: 88px; }
+    .platform-ios.platform-cordova .modal-wrapper .modal .has-header.has-tabs-top {
+      top: 93px; }
+    .platform-ios.platform-cordova .modal-wrapper .modal .has-header.has-subheader.has-tabs-top {
+      top: 137px; }
+    .modal-backdrop-bg {
+      -webkit-transition: opacity 300ms ease-in-out;
+      transition: opacity 300ms ease-in-out;
+      background-color: #000;
+      opacity: 0; }
+    .active .modal-backdrop-bg {
+      opacity: 0.5; } }

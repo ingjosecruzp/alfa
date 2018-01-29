@@ -63,6 +63,15 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
       //Si el usuario no cuenta con ningun libro lo manda a la ventana de ingresar codigo
       console.log(mov)
     });
+
+    //Obtiene el uuid
+    window.plugins.uniqueDeviceID.get(function(uuid){
+      $rootScope.uuid=uuid;
+    },function(error){
+      console.log(error);
+    });
+
+    //Este metodo siempre debe de ir al final de todo
     if (device.platform == "iOS") {
       console.log("platform: " +device.platform) ;
       ionic.Platform.fullScreen();
