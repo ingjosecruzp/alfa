@@ -3,7 +3,7 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
     $scope.libros=[];
     $scope.getlibro={};
     $scope.InfiniteScroll=false;
- 
+
     $scope.CategoriaLibros = function() {
         try{
             $ionicLoading.show({

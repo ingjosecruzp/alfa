@@ -67,7 +67,8 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
             
 
             document.addEventListener("deviceready", function () {
-                $cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_blank', options)
+                //$cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_blank', options)
+                $cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_self', options)
                 .then(function(event) {
                     // success
                     console.log(event);
@@ -80,6 +81,9 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                 //$cordovaInAppBrowser.close();
                 $rootScope.$on('$cordovaInAppBrowser:loadstop', function(e, event){
                     if (event.url.match("assets/cerrar.html")) {
+                    //if (event.url.match('index.html?page=1&Cerrar=yes')) {
+                    //if (event.url.match('file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/index.html?page=1&Cerrar=yes')) {
+                            console.log(location.href);
                             $cordovaInAppBrowser.close();
                     }
                   });
