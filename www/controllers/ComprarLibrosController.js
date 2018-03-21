@@ -123,6 +123,8 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
       };
 
       $scope.anadiraMisLibros = function(libro) {
+        console.log(libro);
+
         var promesa = $q.defer();
         var promises =[];  
         $scope.getlibro=libro;
@@ -155,12 +157,13 @@ app.controller('ComprarLibrosController', function($scope,$ionicPopup,$state,$io
 
                     $q.all(promises).then(function(res) {
                             var Insertlibro = {
-                                id     : libro.Id, 
-                                nombre : libro.Nombre, 
-                                ruta   : libro.RutaThumbnails,
-                                width  : libro.Width,
-                                height : libro.Height,
-                                codigo : respuesta.data[0].codigos.Codigo
+                                id      : libro.Id, 
+                                nombre  : libro.Nombre, 
+                                ruta    : libro.RutaThumbnails,
+                                width   : libro.Width,
+                                height  : libro.Height,
+                                codigo  : respuesta.data[0].codigos.Codigo,
+                                version : libro.Version
                             };
                             mislibros.add(Insertlibro);
                             promesa.resolve("fin");

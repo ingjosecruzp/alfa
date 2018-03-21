@@ -41,7 +41,7 @@ app.run(function($ionicPlatform,$cordovaSQLite,$rootScope,mislibros,movimientos)
     
     //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS libros;');
     //$cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS movimientos;');
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS libros (id PRIMARY KEY,nombre,ruta,width,height,codigo,descargado DEFAULT "NO",pathlibro)');
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS libros (id PRIMARY KEY,nombre,ruta,width,height,codigo,descargado DEFAULT "NO",pathlibro,version)');
     $cordovaSQLite.execute(db,"CREATE TABLE  IF NOT EXISTS movimientos (id INTEGER PRIMARY KEY AUTOINCREMENT,codigo VARCHAR (40) NOT NULL,entrada INTEGER,salida INTEGER);")
 
     //variable para la notificacion del tab 4 tipoglobe
@@ -227,8 +227,8 @@ app.service('Servicios', function() {
 });
 //Variables Globales
 app.value('Variables',{
-  IpServidor: '200.52.220.238:8082'
-  ///IpServidor: '172.16.5.78:8080'
-  //IpServidor: '192.168.1.75:8080'
+  //IpServidor: '200.52.220.238:8082'
+  //IpServidor: '172.16.5.78:8080'
+  IpServidor: '192.168.0.6:8080'
 });
 

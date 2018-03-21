@@ -17,8 +17,8 @@ app.factory('mislibros', function($cordovaSQLite, DBA) {
     }
   
     self.add = function(member) {
-      var parameters = [member.id,member.nombre,member.ruta,member.width,member.height,member.codigo];
-      return DBA.query("INSERT INTO libros (id, nombre,ruta,width,height,codigo) VALUES (?,?,?,?,?,?)", parameters);
+      var parameters = [member.id,member.nombre,member.ruta,member.width,member.height,member.codigo,member.version];
+      return DBA.query("INSERT INTO libros (id, nombre,ruta,width,height,codigo,version) VALUES (?,?,?,?,?,?,?)", parameters);
     }
   
     self.remove = function(member) {
@@ -27,8 +27,8 @@ app.factory('mislibros', function($cordovaSQLite, DBA) {
     }
   
     self.update = function(origMember, editMember) {
-      var parameters = [editMember.id, editMember.descargado,editMember.pathlibro, origMember.id];
-      return DBA.query("UPDATE libros SET id = (?), descargado = (?), pathlibro = (?) WHERE id = (?)", parameters);
+      var parameters = [editMember.id, editMember.descargado,editMember.pathlibro,editMember.version,origMember.id];
+      return DBA.query("UPDATE libros SET id = (?), descargado = (?), pathlibro = (?),version = (?) WHERE id = (?)", parameters);
     }
   
     return self;

@@ -1,4 +1,4 @@
-app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$timeout,$state,$ionicPlatform,$ionicLoading,$cordovaInAppBrowser,$cordovaFileTransfer,Codigo,$cordovaSQLite,mislibros,$cordovaDevice,Variables,$cordovaToast,$cordovaZip,$ionicModal) {
+app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$timeout,$state,$ionicPlatform,$ionicLoading,$cordovaInAppBrowser,$cordovaFileTransfer,Codigo,$cordovaSQLite,mislibros,$cordovaDevice,Variables,$cordovaToast,$cordovaZip,$ionicModal,Versiones) {
     $scope.data = {};
     $scope.Libros={};
     $scope.current=0;
@@ -67,6 +67,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
             
 
             document.addEventListener("deviceready", function () {
+
                 //$cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_blank', options)
                 $cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_self', options)
                 .then(function(event) {
@@ -102,13 +103,24 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
     }
     $scope.DescargarLibro=function(libro){
         try{          
+            var uuid=$rootScope.uuid;
+            console.log(libro);
             //Si el libro ya se encuentra descargado lo manda a visualizar
+            $scope.VisualizarLibro(libro);
             if(libro.descargado=="SI")
             {
-                $scope.VisualizarLibro(libro);
+                Versiones.query({search:'Actualizaciones',libroId:libro.id,version:libro.version,uuid:uuid}, function(respuesta){
+                    if(!respuesta.data.length==0){
+                        console.log("actualizacion");
+                        console.log(respuesta.data);
+                        $scope.Actualizar(libro,respuesta.data[0].Version);
+                    }
+                    else{
+                         $scope.VisualizarLibro(libro);
+                    }
+                });
                 return;
             }
-
             libro.current=0;
             $ionicPlatform.ready(function () {
                 //Oculta la flecha de descarga
@@ -152,7 +164,8 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                             height     : libro.height,
                             codigo     : libro.codigo,
                             pathlibro  : targetunzip,
-                            descargado : "SI"
+                            descargado : "SI",
+                            version    : 1
                         };
 
                         //Actualiza el campo de descargado cuando el libro esta totalmente en el cliente
@@ -208,5 +221,107 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
         catch(err){
             console.log(err);
         }
+    }
+    $scope.Actualizar=function(libro,version){
+        console.log("Actulizando");
+        libro.current=0;
+        $ionicPlatform.ready(function () {
+            //Oculta la flecha de descarga
+            libro.FlechaVisible=false;
+            libro.Descarga=true;
+            //Muestra el spinner antes de iniciar la descarga
+            libro.Spinner=true;
+
+            var uuid=$rootScope.uuid;
+
+            var url = "http://"+Variables.IpServidor+"/FileUploadServ.svc/Libroupdate?identificador="+libro.id+"&UUID="+uuid+"&Codigo="+libro.codigo+"&version="+version;
+            console.log(url);
+
+            var platform =$cordovaDevice.getPlatform();
+          
+            if(platform=="Android"){
+                var targetPath = cordova.file.externalDataDirectory+"ActLibro"+libro.id+".zip";
+                var targetunzip= cordova.file.externalDataDirectory+"Libro"+libro.id;
+            }
+            else{
+                var targetPath = cordova.file.documentsDirectory+"ActLibro"+libro.id+".zip";
+                var targetunzip= cordova.file.documentsDirectory+"Libro"+libro.id;
+            }
+    
+            var trustHosts = true;
+            $cordovaToast.show("Actualizando libro", 'long', 'center');
+            $cordovaFileTransfer.download(url, targetPath, {}, trustHosts).then(function(result) {
+                // Success!
+                $cordovaToast.show("Espere un momento....", 'long', 'center');
+                libro.current={};
+                //libro.Descarga=false;
+
+
+                //Manda descomprir el libro
+                $cordovaZip.unzip(targetPath,targetunzip).then(function () {
+                    console.log('descomprimido');
+
+                    var libroActualizacion = {
+                        id         : libro.id, 
+                        nombre     : libro.nombre, 
+                        ruta       : libro.ruta,
+                        width      : libro.width,
+                        height     : libro.height,
+                        codigo     : libro.codigo,
+                        pathlibro  : targetunzip,
+                        descargado : "SI",
+                        version    : version
+                    };
+
+                    //Actualiza el campo de version cuando el libro esta totalmente en el cliente
+                    mislibros.update(libro,libroActualizacion)
+                    libro.version=version;
+                    libro.descargado="SI";
+                    libro.pathlibro=targetunzip;
+                    libro.disabled=false;
+                    libro.Spinner=false;
+                    libro.Descarga=false;
+
+                    var DescargasActuales=$scope.Libros.find(x => x.disabled === true);
+                    console.log(DescargasActuales);
+                    if(DescargasActuales == undefined)
+                    {
+                            console.log("entro false cache");
+                            $scope.Descargando=false;
+                    }
+                    
+                    $cordovaToast.show("Libro Actualizado", 'long', 'center');
+                    //Manda visualizar el libro
+                    //location.href = targetunzip+'/index.html';
+                }, function () {
+                    $cordovaToast.show('Error en la descarga del libro, intentalo de nuevo', 'long', 'center');
+
+                    //si surge un error en la descarga reiniciar el estado de libro
+                    libro.FlechaVisible=true;
+                    libro.Spinner=false;
+                    libro.Descarga=true;
+                    libro.disabled=false;
+                    libro.current={};
+                }, function (progressEvent) {
+                    //console.log(progressEvent);
+                    //Muestra el spinner antes de descomprimir
+                    libro.Spinner=true;
+                });
+
+            }, function(err) {
+                // Error
+                console.log(err);
+                $cordovaToast.show(err, 'long', 'center');
+            }, function (progress) {
+                $timeout(function () {
+                    //Oculta el spinner al iniciar la descarga
+                    $scope.Descargando=true;
+                    libro.Spinner=false;
+                    libro.disabled=true;
+                    var downloadProgress = (progress.loaded / progress.total) * 100;
+                    libro.current +=downloadProgress-libro.current;
+                });
+            });
+        });
     }
 });
