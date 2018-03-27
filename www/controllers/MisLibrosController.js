@@ -62,11 +62,12 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                 toolbar            : 'yes',
                 zoom               : 'yes',
                 EnableViewPortScale: 'yes',
+                showZoomControls   : 'no',
                 closebuttoncaption : 'Cerrar'
             };
             
 
-            document.addEventListener("deviceready", function () {
+            /*document.addEventListener("deviceready", function () {
 
                 //$cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_blank', options)
                 $cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_self', options)
@@ -91,6 +92,84 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
     
                 $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
                     console.log(e);
+                });
+        
+            }, false);*/
+            document.addEventListener("deviceready", function () {
+                // Keep in mind that you must add your own images to native resource.
+                // Images below are for sample only. They are not imported by this plugin.
+                browser=cordova.ThemeableBrowser.open(libro.pathlibro+'/index.html', '_self', {
+                    statusbar: {
+                        color: '#ffffffff'
+                    },
+                    toolbar: {
+                        height: 44,
+                        color: '#f0f0f0ff'
+                    },
+                    title: {
+                        color: '#003264ff',
+                        showPageTitle: false
+                    },
+                    backButton: {
+                        image: 'back',
+                        imagePressed: 'back_pressed',
+                        align: 'left',
+                        event: 'backPressed'
+                    },
+                    forwardButton: {
+                        image: 'img/press.png',
+                        imagePressed: 'forward_pressed',
+                        align: 'left',
+                        event: 'forwardPressed'
+                    },
+                    closeButton: {
+                        image: 'close',
+                        imagePressed: 'close_pressed',
+                        align: 'left',
+                        event: 'closePressed'
+                    },
+                    customButtons: [
+                        {
+                            image: 'subrayar',
+                            imagePressed: 'share_pressed',
+                            align: 'right',
+                            event: 'sharePressed'
+                        }
+                    ],
+                    menu: {
+                        image: 'menu',
+                        imagePressed: 'menu_pressed',
+                        title: 'Test',
+                        cancel: 'Cancel',
+                        align: 'right',
+                        items: [
+                            {
+                                event: 'helloPressed',
+                                label: 'Hello World!'
+                            },
+                            {
+                                event: 'testPressed',
+                                label: 'Test!'
+                            }
+                        ]
+                    },
+                    backButtonCanClose: true
+                }).addEventListener('backPressed', function(e) {
+                    alert('back pressed');
+                }).addEventListener('helloPressed', function(e) {
+                    alert('hello pressed');
+                }).addEventListener('sharePressed', function(e) {
+                    //alert(e.url);
+                    console.log("click");
+                    browser.executeScript({
+                        code: 'document.getElementById("btnSubrayar").onclick();'
+                    }, function() {
+                        //alert("Image Element Successfully Hijacked");
+                    });
+                }).addEventListener(cordova.ThemeableBrowser.EVT_ERR, function(e) {
+                    console.error(e.message);
+                }).addEventListener(cordova.ThemeableBrowser.EVT_WRN, function(e) {
+                    console.log(e.message);
                 });
         
             }, false);

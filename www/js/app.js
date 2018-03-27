@@ -227,8 +227,8 @@ app.service('Servicios', function() {
 });
 //Variables Globales
 app.value('Variables',{
-  //IpServidor: '200.52.220.238:8082'
+  IpServidor: '200.52.220.238:8082'
   //IpServidor: '172.16.5.78:8080'
-  IpServidor: '192.168.0.6:8080'
+  //IpServidor: '192.168.0.6:8080'
 });
 
