@@ -96,8 +96,12 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
         
             }, false);*/
             document.addEventListener("deviceready", function () {
+                var icono="marcador";
                 // Keep in mind that you must add your own images to native resource.
                 // Images below are for sample only. They are not imported by this plugin.
+                /*Los iconos de la barra se encuntra guardad en la carpeta platform
+                  y son por sistema operativo.
+                 */
                 browser=cordova.ThemeableBrowser.open(libro.pathlibro+'/index.html', '_self', {
                     statusbar: {
                         color: '#ffffffff'
@@ -110,30 +114,48 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                         color: '#003264ff',
                         showPageTitle: false
                     },
-                    backButton: {
-                        image: 'back',
-                        imagePressed: 'back_pressed',
-                        align: 'left',
-                        event: 'backPressed'
-                    },
-                    forwardButton: {
-                        image: 'img/press.png',
-                        imagePressed: 'forward_pressed',
-                        align: 'left',
-                        event: 'forwardPressed'
-                    },
                     closeButton: {
-                        image: 'close',
+                        image: 'close_app',
                         imagePressed: 'close_pressed',
-                        align: 'left',
+                        align: 'right',
                         event: 'closePressed'
                     },
                     customButtons: [
                         {
+                            image: icono,
+                            imagePressed: 'favoritos',
+                            align: 'right',
+                            event: 'marcadorPressed'
+                        },
+                        {
+                            image: 'favoritos',
+                            imagePressed: 'share_pressed',
+                            align: 'right',
+                            event: 'favoritosPressed'
+                        },
+                        {
+                            image: 'list',
+                            imagePressed: 'share_pressed',
+                            align: 'right',
+                            event: 'indicePressed'
+                        },
+                        {
+                            image: 'nota',
+                            imagePressed: 'share_pressed',
+                            align: 'right',
+                            event: 'notaPressed'
+                        },
+                        {
+                            image: 'rayar',
+                            imagePressed: 'share_pressed',
+                            align: 'right',
+                            event: 'rayarPressed'
+                        },
+                        {
                             image: 'subrayar',
                             imagePressed: 'share_pressed',
                             align: 'right',
-                            event: 'sharePressed'
+                            event: 'subrayarPressed'
                         }
                     ],
                     menu: {
@@ -158,7 +180,48 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                     alert('back pressed');
                 }).addEventListener('helloPressed', function(e) {
                     alert('hello pressed');
-                }).addEventListener('sharePressed', function(e) {
+                }).addEventListener('marcadorPressed', function(e) {
+                    //alert(e.url);
+                    console.log("click");
+                    icono="subrayar";
+                    browser.executeScript({
+                        code: 'document.getElementById("btnSeparador").onclick();'
+                    }, function() {
+                        //alert("Image Element Successfully Hijacked");
+                    });
+                }).addEventListener('favoritosPressed', function(e) {
+                    //alert(e.url);
+                    console.log("click");
+                    browser.executeScript({
+                        code: 'document.getElementById("btnListaSeperadores").onclick();'
+                    }, function() {
+                        //alert("Image Element Successfully Hijacked");
+                    });
+                }).addEventListener('indicePressed', function(e) {
+                    //alert(e.url);
+                    console.log("click");
+                    browser.executeScript({
+                        code: 'document.getElementById("btnIndice").onclick();'
+                    }, function() {
+                        //alert("Image Element Successfully Hijacked");
+                    });
+                }).addEventListener('notaPressed', function(e) {
+                    //alert(e.url);
+                    console.log("click");
+                    browser.executeScript({
+                        code: 'document.getElementById("btnNota").onclick();'
+                    }, function() {
+                        //alert("Image Element Successfully Hijacked");
+                    });
+                }).addEventListener('rayarPressed', function(e) {
+                    //alert(e.url);
+                    console.log("click");
+                    browser.executeScript({
+                        code: 'document.getElementById("btnMarcar").onclick();'
+                    }, function() {
+                        //alert("Image Element Successfully Hijacked");
+                    });
+                }).addEventListener('subrayarPressed', function(e) {
                     //alert(e.url);
                     console.log("click");
                     browser.executeScript({
