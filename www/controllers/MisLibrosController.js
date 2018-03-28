@@ -53,6 +53,9 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
             console.log("entro a visualizar libro");
             console.log(libro);
             console.log(libro.pathlibro+'/index.html');
+            $state.go('visor')
+            return;
+
             //location.href = libro.pathlibro+'/index.html';
 
             console.log("entro app browser");
@@ -97,6 +100,22 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
             }, false);*/
             document.addEventListener("deviceready", function () {
                 var icono="marcador";
+
+                // Prepare the picker configuration
+                var config = {
+                    title: "Select a Fruit", 
+                    items: [
+                        { text: "Orange", value: "orange" },
+                        { text: "Apple", value: "apple" },
+                        { text: "Watermelon", value: "watermelon" },
+                        { text: "Papaya", value: "papaya" },
+                        { text: "Banana", value: "banana" },
+                        { text: "Pear", value: "pear" }         
+                    ],
+                    selectedValue: "papaya",
+                    doneButtonLabel: "Done",
+                    cancelButtonLabel: "Cancel"
+                };
                 // Keep in mind that you must add your own images to native resource.
                 // Images below are for sample only. They are not imported by this plugin.
                 /*Los iconos de la barra se encuntra guardad en la carpeta platform
@@ -109,10 +128,6 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                     toolbar: {
                         height: 44,
                         color: '#f0f0f0ff'
-                    },
-                    title: {
-                        color: '#003264ff',
-                        showPageTitle: false
                     },
                     closeButton: {
                         image: 'close_app',
@@ -136,7 +151,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                         {
                             image: 'list',
                             imagePressed: 'share_pressed',
-                            align: 'right',
+                            align: 'center',
                             event: 'indicePressed'
                         },
                         {
@@ -159,7 +174,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                         }
                     ],
                     menu: {
-                        image: 'menu',
+                        image: 'rayar',
                         imagePressed: 'menu_pressed',
                         title: 'Test',
                         cancel: 'Cancel',
@@ -167,11 +182,28 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                         items: [
                             {
                                 event: 'helloPressed',
-                                label: 'Hello World!'
+                                label: 'subrayar'
                             },
                             {
                                 event: 'testPressed',
-                                label: 'Test!'
+                                label: 'subrayar Test!'
+                            }
+                        ]
+                    },
+                    menu: {
+                        image: 'subrayar',
+                        imagePressed: 'menu_pressed',
+                        title: 'Test 2',
+                        cancel: 'Cancel',
+                        align: 'left',
+                        items: [
+                            {
+                                event: 'helloPressed',
+                                label: 'rayar'
+                            },
+                            {
+                                event: 'testPressed',
+                                label: 'rayar test'
                             }
                         ]
                     },
@@ -182,6 +214,16 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                     alert('hello pressed');
                 }).addEventListener('marcadorPressed', function(e) {
                     //alert(e.url);
+                    // Show the picker
+                    window.plugins.listpicker.showPicker(config, 
+                        function(item) { 
+                            alert("You have selected " + item);
+                        },
+                        function() { 
+                            alert("You have cancelled");
+                        }
+                    );
+                    return;
                     console.log("click");
                     icono="subrayar";
                     browser.executeScript({

@@ -177,6 +177,12 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider,$ionicConfi
         controller: 'IngresarCodigosController'
       }
     }
+  })
+  
+  .state('visor', {
+    url: '/visor',
+    templateUrl: 'templates/Visor.html'
+    //controller: 'ExternalCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback
