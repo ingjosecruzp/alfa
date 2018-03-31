@@ -291,6 +291,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
             console.log(libro);
             //Si el libro ya se encuentra descargado lo manda a visualizar
             $scope.VisualizarLibro(libro);
+            return;
             if(libro.descargado=="SI")
             {
                 Versiones.query({search:'Actualizaciones',libroId:libro.id,version:libro.version,uuid:uuid}, function(respuesta){
