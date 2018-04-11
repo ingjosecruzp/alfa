@@ -53,7 +53,15 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
             console.log("entro a visualizar libro");
             console.log(libro);
             console.log(libro.pathlibro+'/index.html');
-            $state.go('visor')
+            /*$ionicLoading.show({
+                noBackdrop :false,
+                template: '<ion-spinner icon="spiral"></ion-spinner><br>Descargando Libros',
+                //duration :20000//Optional
+            });*/
+            document.addEventListener("deviceready", function () {
+                //ProgressIndicator.showSimple(true);
+                $state.go('visor')
+            });
             return;
 
             //location.href = libro.pathlibro+'/index.html';

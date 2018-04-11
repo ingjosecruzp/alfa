@@ -1,20 +1,59 @@
-<ion-view title="some title" ng-init="Inicio()"> 
-    <ion-nav-bar class="bar-positive">test bar</ion-nav-bar>
-   <ion-content>
-        <ion-scroll id="contenedorLibro" zooming="true" scrollbar-x="false" scrollbar-y="false" direction="xy" min-zoom="1" overflow-scroll="false" style="width: 100%; height: 100%">
-            <!--<div style="width: 100%; height: 100%">
-                <iframe style="width: 100%; height: 100%" src="file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/index.html"></iframe>
-            </div>-->
-            <!--<ng-include src="file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/1.html"></ng-include>
-            <div id="page1" class="page" style="width: 350px;height: 500px;">
-                <div class="page-inner" style="width: 909px; height: 1299px" ng-include="'file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/1.html'"></div>
+<ion-view ng-init="Inicio()"> 
+    <div id="controls" class="controls">
+        <div id="leftcontrols" class="leftcontrols">
+            <span ng-bind="Hojas.HojaActual" style="color: white;padding-left: 10px;">#</span>
+        </div>
+        <div id="centercontrols" class="centercontrols">
+                <button id="btnSeparador" title="Separador" class="btn" ng-click="BtnSeparador()"><i class="fa fa-bookmark fa-lg" ></i></button>
+                <button id="btnSeparador" title="Separador" class="btn"><i class="fa fa-star fa-lg" ></i></button>
+                <button id="btnSeparador" title="Separador" class="btn"><i class="fa fa-list-ul fa-lg" ></i></button>
+                <button id="btnSeparador" title="Separador" class="btn"><i class="fa fa-sticky-note fa-lg" ></i></button>
+                <button id="btnSeparador" title="Separador" class="btn"><i class="fa fa-pencil-square-o fa-lg" ></i></button>
+                <button id="btnSeparador" title="Separador" class="btn"><i class="fa fa-underline fa-lg" ></i></button>
+        </div>
+        <div id="rightcontrols" class="rightcontrols">
+                <button id="btnSeparador" title="Separador" class="btn"><i class="fa fa-times fa-lg" ></i></button>
+        </div>
+    </div>
+    <ion-content style="top:45px" scroll="true">
+        <ion-scroll id="contenedorLibro" scrollbar-x="false" scrollbar-y="false" delegate-handle="handler" on-scroll="test()" zooming="true" direction="xy" overflow-scroll="true" min-zoom="1" style="width: 100%;height: 100%;">
+           <div id="page{{hoja.NumHoja}}" class="page" style="width: 350px;height: 500px;" ng-repeat="hoja in HojasLibro">
+                <div id="page-inner{{hoja.NumHoja}}" class="page-inner" on-double-tap="DoubleTap(hoja.NumHoja)" style="width: 909px; height: 1299px;transform:translateX(0px) translateY(0px) scale(0.384953233)">
+                </div>
+                <!--<div class="page-inner{{hoja.NumHoja}}" style="width: 909px; height: 1299px;transform:translateX(0px) translateY(0px) scale(0.384953233)" ng-include src="hoja.Path"></div>-->
             </div>
-            <div id="page2" class="page" style="width: 350px;height: 500px;">
-                <div class="page-inner" style="width: 909px; height: 1299px" ng-include="'file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/2.html'"></div>
-            </div>
-            <div id="page3" class="page" style="width: 350px;height: 500px;">
-                <div class="page-inner" style="width: 909px; height: 1299px" ng-include="'file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/3.html'"></div>
-            </div>-->
         </ion-scroll>
-   </ion-content>
+         <!--<ion-scroll id="zoom" scrollbar-x="false" scrollbar-y="false" delegate-handle="handlerZoom" on-scroll="ScrollZoom(1)" zooming="true" direction="xy" overflow-scroll="false" min-zoom="1" style="width: 100%;height: 100%;position: absolute;z-index: -1">
+        </ion-scroll>-->
+          <!--<ion-scroll id="zoom1"delegate-handle="zoom1" zooming="true" direction="xy" min-zoom="1" overflow-scroll="false" style="width: 100%; height: 100%">
+            <div id="zoom" class="page" style="width: 350px;height: 500px;">
+                    <div class="page-inner" style="width: 909px; height: 1299px;transform:translateX(0px) translateY(0px) scale(0.384953233)" ng-include="'file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/1.html'"></div>
+            </div>
+        </ion-scroll>-->
+        <!--<ion-scrol id="contenedorLibro" overflow-scroll="true" direction="xy" style="width: 100%; height: 100%">
+
+        </ion-sc"rol>-->
+        <!--<div id="contenedorLibro">
+            <ion-scroll id="zoom1"delegate-handle="zoom1" zooming="true" direction="xy" min-zoom="1" overflow-scroll="false" style="width: 100%; height: 100%">
+                <div id="page1" class="page" style="width: 350px;height: 500px;" on-double-tap="DoubleTap('zoom1')">                
+                    <div class="page-inner" style="width: 909px; height: 1299px;transform:translateX(0px) translateY(0px) scale(0.384953233)" ng-include="'file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/1.html'">
+                    </div>
+                </div>
+            </ion-scroll>
+            <ion-scroll id="zoom2"delegate-handle="zoom2" zooming="true" direction="xy" min-zoom="1" overflow-scroll="false" style="width: 100%; height: 100%">
+                    <div id="page2" class="page" style="width: 350px;height: 500px;" on-double-tap="DoubleTap('zoom2')">                
+                        <div class="page-inner" style="width: 909px; height: 1299px;transform:translateX(0px) translateY(0px) scale(0.384953233)" ng-include="'file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/2.html'">
+                        </div>
+                    </div>
+                </ion-scroll>
+        </div>-->
+    </ion-content>
+    <ion-floating-menu >
+            <ion-floating-item icon="fa fa-underline fa-lg" click="myEvent()"></ion-floating-item>
+            <ion-floating-item icon="fa fa-pencil-square-o fa-lg" click="myEvent()"></ion-floating-item>
+            <ion-floating-item icon="fa fa-sticky-note fa-lg" click="myEvent()"></ion-floating-item>
+            <ion-floating-item icon="fa fa-list-ul fa-lg" click="myEvent()"></ion-floating-item>
+            <ion-floating-item icon="fa fa-star fa-lg" click="myEvent()"></ion-floating-item>
+            <ion-floating-item icon="fa fa-bookmark fa-lg" click="myEvent()"></ion-floating-item>
+    </ion-floating-menu>
  </ion-view>

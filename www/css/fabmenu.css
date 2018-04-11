@@ -1,0 +1,90 @@
+/*
+* Mixins
+*/
+
+
+.fab-menu {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: scale(2);
+  transform: scale(2);
+  position: absolute;
+  top: auto;
+  right: auto;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  padding: 20px;
+}
+.fab-menu.fab-menu-left {
+  top: auto;
+  right: auto;
+  left: 0;
+  bottom: 0;
+}
+.fab-menu.fab-menu-right {
+  top: auto;
+  right: 0;
+  left: auto;
+  bottom: 0;
+}
+.fab-menu .fab-menu-button {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 101;
+}
+
+.fab-menu-items {
+  /**
+   * @see http://hugogiraudel.com/2013/04/02/items-on-circle/
+   */
+  z-index: 99;
+  position: absolute;
+  width: 168px;
+  height: 168px;
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  border-radius: 50%;
+  list-style: none;
+}
+.fab-menu.active .fab-menu-items {
+  display: block;
+}
+.fab-menu-items > li {
+  -webkit-transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s;
+  display: block;
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  top: auto;
+  right: auto;
+  bottom: 20px;
+  left: 20px;
+}
+
+.fab-menu-overlay {
+  -webkit-transition: all 0.2s ease 0.2s;
+  transition: all 0.2s ease 0.2s;
+  position: fixed;
+  display: none;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  z-index: 98;
+}
+.fab-menu-overlay.active {
+  display: block;
+}

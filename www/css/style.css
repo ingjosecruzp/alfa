@@ -348,3 +348,71 @@
       opacity: 0; }
     .active .modal-backdrop-bg {
       opacity: 0.5; } }
+
+      .btn {
+        border: 0 none;
+        height: 30px;
+        padding: 0;
+        width: 30px;
+        background-color: transparent;
+        display: inline-block;
+        margin: 7px 5px 0;
+        vertical-align: top;
+        cursor: pointer;
+        color: #fff;
+    }
+    .controls{
+        height: 44px;
+        line-height: 44px;
+        position: fixed;
+        text-align: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        transition: 0.3s ease 0s;
+        background: #0c60ee none repeat scroll 0 0;
+        border-bottom: 1px solid #0c60ee;
+    }
+    .centercontrols{
+        display: inline-block;
+    }
+    .rightcontrols{
+        display: inline-block;
+        right: 0;
+        position: absolute;
+    }
+    .leftcontrols{
+        display: inline-block;
+        left: 0;
+        position: absolute;
+    }
+    #floating-menu { 
+        left:20px;
+    }
+
+/***************/
+/*Float buttuon*/
+.float{
+    position:fixed;
+    bottom:140px;
+    right:16px;
+    /*display: none;*/
+}
+
+.my-float{
+    margin-top:17px;
+}
+.btn-group a{
+    width:70px;
+    height:70px;
+    background-color:#cc00a0;
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+    margin-top:	9px;
+    display: block; /* Make the buttons appear below each other */
+}
+
+/****************/
