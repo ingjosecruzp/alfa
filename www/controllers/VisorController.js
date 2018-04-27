@@ -13,6 +13,10 @@ app.controller('VisorController', function($scope,$q,$compile,$timeout,$ionicPop
     var PagesInner=[];
     var TempZoom=false;
     var MainZoom;
+    var EstadoBarra=true;
+    var x;
+    var y;
+    var StartX;
     
    /*var CargarPagina = function(i,pagina){
         $http.get('file:///storage/emulated/0/Android/data/io.ionic.starter/files/Libro2/'+ i +'.html')
@@ -38,7 +42,8 @@ app.controller('VisorController', function($scope,$q,$compile,$timeout,$ionicPop
         $http.get(hoja.Path)
         .success(function(data) {
           document.getElementById("page-inner"+hoja.NumHoja).innerHTML=data;
-          return data;
+          if(hoja.NumHoja==2) $compile(document.getElementById("page-inner"+hoja.NumHoja))($scope);
+          //return data;
           //pagina.style.transform="translateX(0px) translateY(0px) scale(0.384953233)";
       }).error(function(data){console.log("The request isn't working");}); 
     }
@@ -193,9 +198,62 @@ app.controller('VisorController', function($scope,$q,$compile,$timeout,$ionicPop
     }
 
     $scope.BtnSeparador=function(){
-        CargarPaginas().then(function(rsp){
-            console.log("final de todo");
-        });
+        alert("separador");
+    }
+    $scope.Tap=function(id){
+        console.log("tap");
+        var contenedor=document.getElementById("contenedorLibro");
+        var menu=document.getElementById("menuFlotante");
+
+        if(EstadoBarra==true){
+            menu.style.transform="display 0.3s";
+            //contenedor.style.transition="top 0.1s";
+
+            //contenedor.style.top="0px";
+            menu.style.display="none";
+
+            EstadoBarra=false;
+        }
+        else{
+            //contenedor.style.top="45px";
+            menu.style.display=null;
+            EstadoBarra=true;
+        }
+
+        //barra.style.display="none";
+        
+        //document.getElementById("contenedorLibro").style.top="0px";
+    }
+    $scope.onDragPagina=function(lado){
+        return;
+        /*
+            1=Right
+            0=Left
+        */
+        if(TempZoom==false) return;
+
+        var Limite=screen.width/2;
+        /*var Limite=150;
+
+        var Tempx=x;
+        x+= Math.abs(x) > Limite ? x : event.gesture.touches[0].clientX-StartX;
+
+        if(Math.abs(x) > Limite) 
+        {
+            x=Tempx;
+            return;
+        }*/
+        console.log("x :" + x);
+        console.log("Limite :" + Limite);
+        if(Math.abs(x) > Limite) return;
+
+        x=lado==1 ? x+40 : x-40;
+
+        document.getElementById('contenedorLibro').style.transform= "translate3d("+x+"px,"+y+"px, 0px) scale(1.75)"; 
+    }
+    $scope.ontouchPagina=function(){
+        //console.log("ontouchPagina :" + event.gesture.touches[0].clientX)
+        StartX= event.gesture.touches[0].clientX;
     }
     $scope.DoubleTap=function(id){
         /*document.getElementById('zoom'+id).getElementsByClassName("scroll")[0].appendChild(document.getElementById('page-inner'+id));
@@ -207,21 +265,43 @@ app.controller('VisorController', function($scope,$q,$compile,$timeout,$ionicPop
 
         $ionicScrollDelegate.$getByHandle('handlerZoom').zoomTo(1.32014,false,0,0);*/
         //$ionicScrollDelegate.zoomTo(1.32014,false,0,0);
-        var position = $scope.getTouchposition(event,id);
+        //console.log(event);
+        //console.log(event.gesture.touches[0].clientX);
+        //console.log(event.gesture.touches[0].clientY);
+        //console.log(getPosition(event.gesture.touches[0].target));
+        //console.log(getPosition(document.getElementById("pg"+id+"Overlay")));
+        //var position = $scope.getTouchposition(event,id);
+        var position={
+            x : event.gesture.touches[0].clientX,
+            y : event.gesture.touches[0].clientY
+        }
         console.log(position);
         //document.getElementById('page-inner'+id).style.transform="translate3d("+position.x+"px,"+position.y+"px,0) scale(0.484953233)";
         //document.getElementById('page-inner'+id).style.transform="translateX("+position.x+"px) translateY("+position.y+"px) scale(0.484953233)";
         //transition: [property] [duration] [timing-function] [delay];
         if(TempZoom==false)
         {
+            y=(screen.height/2)-position.y;
+            x=(screen.width/2)-position.x;
+
+            console.log("correcion x: "+ x);
+            console.log("correcion y: "+ y);
+
             TempZoom=true;
-            document.getElementById('contenedorLibro').style.transition="transform 0.5s";
-            document.getElementById('contenedorLibro').style.transform="translateX(0px) translateY(0px) scale(1.75)";
+            //document.getElementById('contenedorLibro').style.transition="transform 0.5s";
+            document.getElementById('contenedorLibro').style.transition="transform 0.2s";
+            //document.getElementById('contenedorLibro').style.transform="translateX(0px) translateY(0px) scale(1.75)";
+            document.getElementById('contenedorLibro').style.transform= "translate3d("+x+"px,"+y+"px, 0px) scale(1.75)"; 
+            //document.getElementById('contenedorLibro').style.overflowX="scroll";
+            //$ionicScrollDelegate.$getByHandle('handler').resize();
         }
         else
         {
             TempZoom=false;
-            document.getElementById('contenedorLibro').style.transform="translateX(0px) translateY(0px) scale(1)";
+            //document.getElementById('contenedorLibro').style.transform="translateX(0px) translateY(0px) scale(1)";
+            document.getElementById('contenedorLibro').style.transform= "translate3d(0px,0px, 0px) scale(1)";
+            //document.getElementById('contenedorLibro').style.overflowX="scroll";
+            //$ionicScrollDelegate.$getByHandle('handler').resize();
         }
     }
     //$scope.DoubleTap=function(id){        
@@ -291,7 +371,7 @@ app.controller('VisorController', function($scope,$q,$compile,$timeout,$ionicPop
             $ionicScrollDelegate.$getByHandle(NombreObjeto).zoomTo(1, false, 0, 0);*/
     }
     $scope.test=function(){
-        //console.log($ionicScrollDelegate.getScrollPosition().top);
+        //console.log($ionicScrollDelegate.getScrollPosition());
         /*var scroll=$ionicScrollDelegate.$getByHandle('handler').getScrollPosition();
         var posicion=(scroll.top)/scroll.zoom;
         var HojaIndex=-1;
@@ -328,7 +408,9 @@ app.controller('VisorController', function($scope,$q,$compile,$timeout,$ionicPop
     $scope.getTouchposition = function(event,id){
         //console.log(event.gesture.touches[0].target);
         //var canvasPosition = getPosition(event.gesture.touches[0].target);
-        var canvasPosition = getPosition( document.getElementById("pg"+id+"Overlay"));
+        //var canvasPosition = getPosition( document.getElementById("pg"+id+"Overlay"));
+        //var canvasPosition = getPosition( document.getElementById("contenedorLibro"));
+        var canvasPosition = getPosition( document.getElementById("page"+id));
         //var canvasPosition = getPosition( document.getElementById("page-inner1"));
         
         var tap = { x:0, y:0 };
