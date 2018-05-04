@@ -60,9 +60,10 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
             });*/
             document.addEventListener("deviceready", function () {
                 //ProgressIndicator.showSimple(true);
-                $state.go('visor')
+                //$state.go('visor')
+              //  PluginName.new_activity();
             });
-            return;
+            //return;
 
             //location.href = libro.pathlibro+'/index.html';
 
@@ -78,7 +79,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
             };
             
 
-            /*document.addEventListener("deviceready", function () {
+            document.addEventListener("deviceready", function () {
 
                 //$cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_blank', options)
                 $cordovaInAppBrowser.open(libro.pathlibro+'/index.html', '_self', options)
@@ -105,8 +106,8 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                     console.log(e);
                 });
         
-            }, false);*/
-            document.addEventListener("deviceready", function () {
+            }, false);
+           /* document.addEventListener("deviceready", function () {
                 var icono="marcador";
 
                 // Prepare the picker configuration
@@ -128,7 +129,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                 // Images below are for sample only. They are not imported by this plugin.
                 /*Los iconos de la barra se encuntra guardad en la carpeta platform
                   y son por sistema operativo.
-                 */
+                 
                 browser=cordova.ThemeableBrowser.open(libro.pathlibro+'/index.html', '_self', {
                     statusbar: {
                         color: '#ffffffff'
@@ -285,7 +286,7 @@ app.controller('MisLibrosController', function($scope,$ionicPopup,$rootScope,$ti
                     console.log(e.message);
                 });
         
-            }, false);
+            }, false);*/
           
         }
         catch(err){

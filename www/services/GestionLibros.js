@@ -15,7 +15,7 @@ app.service('GestionLibros', function($ionicPlatform,$cordovaFileTransfer,movimi
 
                   var alertPopup = $ionicPopup.alert({
                       title: 'Felicidades',
-                      subTitle: 'Felicidades has adquirido '+ response.data.length + ' libro.',
+                      subTitle: 'Felicidades has adquirido '+ response.data.length + ' libros.',
                   }); 
 
                   //Este evento entra hasta que se preciona el boton ok
@@ -97,7 +97,7 @@ app.service('GestionLibros', function($ionicPlatform,$cordovaFileTransfer,movimi
             
             var alertPopup = $ionicPopup.alert({
               title: 'Felicidades',
-              subTitle: 'Felicidades has adquirido '+ codigo.TotalLibros + ' credito para comprar tus libros.',
+              subTitle: 'Felicidades has adquirido '+ codigo.TotalLibros + ' creditos para comprar tus libros.',
             }); 
       
             alertPopup.then(function(res) {
