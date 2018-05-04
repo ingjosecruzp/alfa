@@ -99,5 +99,4 @@
     <engine name="android" spec="~6.1.1" />
     <plugin name="cordova-plugin-sscthemeablebrowser" spec="~1.2.1" />
     <plugin name="cordova-plugin-listpicker" spec="~2.2.2" />
-    <plugin name="org.pbernasconi.progressindicator" spec="~1.1.0" />
 </widget>
